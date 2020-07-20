@@ -32,19 +32,19 @@ public class ProductEditor extends javax.swing.JDialog {
    private void initComponents() {
 
       productID = new javax.swing.JLabel();
-      productName = new javax.swing.JLabel();
-      productDescription = new javax.swing.JLabel();
-      productCategory = new javax.swing.JLabel();
-      productPrice = new javax.swing.JLabel();
-      productQuantity = new javax.swing.JLabel();
       txtId = new javax.swing.JTextField();
+      productName = new javax.swing.JLabel();
       txtName = new javax.swing.JTextField();
+      productDescription = new javax.swing.JLabel();
       scrollDescription = new javax.swing.JScrollPane();
       txtDescription = new javax.swing.JTextArea();
+      productPrice = new javax.swing.JLabel();
       txtPrice = new javax.swing.JTextField();
+      productQuantity = new javax.swing.JLabel();
       txtQuantity = new javax.swing.JTextField();
       saveButton = new javax.swing.JButton();
       cancelButton = new javax.swing.JButton();
+      productCategory = new javax.swing.JLabel();
       categorycombobox = new javax.swing.JComboBox<>();
       producteditor = new javax.swing.JLabel();
 
@@ -53,24 +53,15 @@ public class ProductEditor extends javax.swing.JDialog {
       productID.setText("ID:");
       productID.setName("productID"); // NOI18N
 
+      txtId.setName("txtId"); // NOI18N
+
       productName.setText("Name:");
       productName.setName("productName"); // NOI18N
 
+      txtName.setName("txtName"); // NOI18N
+
       productDescription.setText("Desciption:");
       productDescription.setName("productDescription"); // NOI18N
-
-      productCategory.setText("Category:");
-      productCategory.setName("productCategory"); // NOI18N
-
-      productPrice.setText("Price:");
-      productPrice.setName("productPrice"); // NOI18N
-
-      productQuantity.setText("Quantity in Stock:");
-      productQuantity.setName("productQuantity"); // NOI18N
-
-      txtId.setName("txtId"); // NOI18N
-
-      txtName.setName("txtName"); // NOI18N
 
       scrollDescription.setName("scrollDescription"); // NOI18N
 
@@ -79,7 +70,13 @@ public class ProductEditor extends javax.swing.JDialog {
       txtDescription.setName("txtDescription"); // NOI18N
       scrollDescription.setViewportView(txtDescription);
 
+      productPrice.setText("Price:");
+      productPrice.setName("productPrice"); // NOI18N
+
       txtPrice.setName("txtPrice"); // NOI18N
+
+      productQuantity.setText("Quantity in Stock:");
+      productQuantity.setName("productQuantity"); // NOI18N
 
       txtQuantity.setName("txtQuantity"); // NOI18N
 
@@ -99,6 +96,9 @@ public class ProductEditor extends javax.swing.JDialog {
          }
       });
 
+      productCategory.setText("Category:");
+      productCategory.setName("productCategory"); // NOI18N
+
       categorycombobox.setName("categorycombobox"); // NOI18N
 
       producteditor.setText("Product Editor");
@@ -111,6 +111,10 @@ public class ProductEditor extends javax.swing.JDialog {
          .addGroup(layout.createSequentialGroup()
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                .addGroup(layout.createSequentialGroup()
+                  .addGap(172, 172, 172)
+                  .addComponent(producteditor)
+                  .addGap(0, 140, Short.MAX_VALUE))
+               .addGroup(layout.createSequentialGroup()
                   .addContainerGap()
                   .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                      .addComponent(productID, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -121,29 +125,22 @@ public class ProductEditor extends javax.swing.JDialog {
                      .addComponent(productQuantity, javax.swing.GroupLayout.Alignment.TRAILING))
                   .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                   .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(saveButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cancelButton))
                      .addComponent(txtName)
-                     .addComponent(scrollDescription, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                     .addComponent(scrollDescription, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
                      .addComponent(txtPrice)
                      .addComponent(txtQuantity)
                      .addComponent(categorycombobox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                     .addComponent(txtId)))
-               .addGroup(layout.createSequentialGroup()
-                  .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                     .addGroup(layout.createSequentialGroup()
-                        .addGap(98, 98, 98)
-                        .addComponent(saveButton)
-                        .addGap(43, 43, 43)
-                        .addComponent(cancelButton))
-                     .addGroup(layout.createSequentialGroup()
-                        .addGap(172, 172, 172)
-                        .addComponent(producteditor)))
-                  .addGap(0, 0, Short.MAX_VALUE)))
+                     .addComponent(txtId))))
             .addContainerGap())
       );
       layout.setVerticalGroup(
          layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
          .addGroup(layout.createSequentialGroup()
-            .addContainerGap(8, Short.MAX_VALUE)
+            .addGap(8, 8, 8)
             .addComponent(producteditor)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -155,7 +152,7 @@ public class ProductEditor extends javax.swing.JDialog {
                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-               .addComponent(scrollDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+               .addComponent(scrollDescription, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
                .addComponent(productDescription))
             .addGap(14, 14, 14)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -170,7 +167,7 @@ public class ProductEditor extends javax.swing.JDialog {
                .addComponent(productQuantity)
                .addComponent(txtQuantity, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                .addComponent(saveButton)
                .addComponent(cancelButton)))
       );
@@ -188,12 +185,15 @@ public class ProductEditor extends javax.swing.JDialog {
 		BigDecimal p = new BigDecimal(price);
 		BigDecimal q = new BigDecimal(quantity);
 		domain.Product product = new domain.Product();
-		product.setProduct_id(id);
-		product.setList_price(p);
-		product.setName(name);
+		product.setProductID(id);
+		product.setListPrice(p);
+		product.setProductName(name);
 		product.setCategory(category);
 		product.setDescription(description);
-		product.setQuantity_in_stock(q);
+		product.setQuantityInStock(q);
+		//dao.ProductCollectionsDAO productsList = new dao.ProductCollectionsDAO();
+		//productsList.saveProduct();
+		dispose();
    }//GEN-LAST:event_saveButtonActionPerformed
 
    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
