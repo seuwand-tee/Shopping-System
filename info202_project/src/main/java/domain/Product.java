@@ -19,11 +19,25 @@ public class Product {
 	private BigDecimal list_price;
 	private BigDecimal quantity_in_stock;
 
-	public String getProduct_id() {
+	public Product() {
+	}
+	
+
+	public Product(String product_id, String name, String description, String category, BigDecimal list_price, BigDecimal quantity_in_stock) {
+		this.product_id = product_id;
+		this.name = name;
+		this.description = description;
+		this.category = category;
+		this.list_price = list_price;
+		this.quantity_in_stock = quantity_in_stock;
+	}
+	
+
+	public String getProductID() {
 		return product_id;
 	}
 
-	public String getName() {
+	public String getProductName() {
 		return name;
 	}
 
@@ -35,19 +49,19 @@ public class Product {
 		return category;
 	}
 
-	public BigDecimal getList_price() {
+	public BigDecimal getListPrice() {
 		return list_price;
 	}
 
-	public BigDecimal getQuantity_in_stock() {
+	public BigDecimal getQuantityInStock() {
 		return quantity_in_stock;
 	}
 
-	public void setProduct_id(String product_id) {
+	public void setProductID(String product_id) {
 		this.product_id = product_id;
 	}
 
-	public void setName(String name) {
+	public void setProductName(String name) {
 		this.name = name;
 	}
 
@@ -59,18 +73,18 @@ public class Product {
 		this.category = category;
 	}
 
-	public void setList_price(BigDecimal list_price) {
+	public void setListPrice(BigDecimal list_price) {
 		this.list_price = list_price;
 	}
 
-	public void setQuantity_in_stock(BigDecimal quantity_in_stock) {
+	public void setQuantityInStock(BigDecimal quantity_in_stock) {
 		this.quantity_in_stock = quantity_in_stock;
 	}
 
 	@Override
 	public String toString() {
-		return "Product{" + "product_id=" + product_id + ", name=" + name;
+		return "Product{" + "product_id=" + product_id + ", name=" + name + ", description=" + description + ", category=" + category + ", list_price=" + list_price + ", quantity_in_stock=" + quantity_in_stock + '}';
+	}
+
 	
-	
-}
 }
