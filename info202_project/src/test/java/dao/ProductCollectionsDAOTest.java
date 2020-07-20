@@ -6,6 +6,8 @@
 package dao;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Collection;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,6 +21,7 @@ public class ProductCollectionsDAOTest {
 	private domain.Product product;
 	private domain.Product item;
 	private domain.Product stock;
+	private static Collection<domain.Product> items = new ArrayList<domain.Product>();
 	
 	@BeforeEach
 	public void setUp() {
@@ -30,24 +33,28 @@ public class ProductCollectionsDAOTest {
 		product.setListPrice(new BigDecimal(10));
 		product.setQuantityInStock(new BigDecimal(5));
 		item = new domain.Product();
-		item.setCategory("category");
-		item.setDescription("description");
-		item.setProductID("item");
-		item.setProductName("Polkadot Widget");
-		item.setListPrice(new BigDecimal(10));
-		item.setQuantityInStock(new BigDecimal(5));
+		item.setCategory("category1");
+		item.setDescription("description1");
+		item.setProductID("item1");
+		item.setProductName("Widget");
+		item.setListPrice(new BigDecimal(101));
+		item.setQuantityInStock(new BigDecimal(51));
 		stock = new domain.Product();
-		stock.setCategory("category");
-		stock.setDescription("description");
-		stock.setProductID("item");
-		stock.setProductName("Polkadot Widget");
-		stock.setListPrice(new BigDecimal(10));
-		stock.setQuantityInStock(new BigDecimal(5));
+		stock.setCategory("category2");
+		stock.setDescription("description2");
+		stock.setProductID("item2");
+		stock.setProductName("Widget2");
+		stock.setListPrice(new BigDecimal(102));
+		stock.setQuantityInStock(new BigDecimal(52));
+		items.add(item);
+		items.add(stock);
 		
 	}
 	
 	@AfterEach
 	public void tearDown() {
+		items.remove(item);
+		items.remove(stock);
 	}
 
 	@Test
