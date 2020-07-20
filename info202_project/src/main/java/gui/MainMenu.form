@@ -1,26 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
-  <NonVisualComponents>
-    <Container class="javax.swing.JPanel" name="jPanel1">
-      <Properties>
-        <Property name="name" type="java.lang.String" value="jPanel1" noResource="true"/>
-      </Properties>
-
-      <Layout>
-        <DimensionLayout dim="0">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="100" max="32767" attributes="0"/>
-          </Group>
-        </DimensionLayout>
-        <DimensionLayout dim="1">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="100" max="32767" attributes="0"/>
-          </Group>
-        </DimensionLayout>
-      </Layout>
-    </Container>
-  </NonVisualComponents>
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
   </Properties>
@@ -46,11 +26,11 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="102" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="productAdministration" alignment="0" min="-2" pref="216" max="-2" attributes="0"/>
+                  <Component id="label1" alignment="0" min="-2" pref="216" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="newProduct" pref="209" max="32767" attributes="0"/>
-                      <Component id="viewProduct" max="32767" attributes="0"/>
-                      <Component id="exitButton" max="32767" attributes="0"/>
+                      <Component id="jButton1" pref="209" max="32767" attributes="0"/>
+                      <Component id="jButton2" max="32767" attributes="0"/>
+                      <Component id="jButton3" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="82" max="32767" attributes="0"/>
@@ -61,41 +41,39 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-              <Component id="productAdministration" min="-2" pref="69" max="-2" attributes="0"/>
+              <Component id="label1" min="-2" pref="69" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="newProduct" min="-2" max="-2" attributes="0"/>
+              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="viewProduct" min="-2" max="-2" attributes="0"/>
+              <Component id="jButton2" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="exitButton" min="-2" max="-2" attributes="0"/>
+              <Component id="jButton3" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="87" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="newProduct">
+    <Component class="javax.swing.JButton" name="jButton1">
       <Properties>
         <Property name="text" type="java.lang.String" value="Add a New Product"/>
-        <Property name="name" type="java.lang.String" value="newProduct" noResource="true"/>
+        <Property name="actionCommand" type="java.lang.String" value="Add a New Product"/>
+        <Property name="name" type="java.lang.String" value="jButton1" noResource="true"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="viewProduct">
+    <Component class="javax.swing.JButton" name="jButton2">
       <Properties>
         <Property name="text" type="java.lang.String" value="View Products"/>
-        <Property name="name" type="java.lang.String" value="viewProduct" noResource="true"/>
+        <Property name="name" type="java.lang.String" value="jButton2" noResource="true"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="exitButton">
+    <Component class="javax.swing.JButton" name="jButton3">
       <Properties>
         <Property name="text" type="java.lang.String" value="Exit"/>
-        <Property name="name" type="java.lang.String" value="exitButton" noResource="true"/>
+        <Property name="name" type="java.lang.String" value="jButton3" noResource="true"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="exitButtonActionPerformed"/>
-      </Events>
     </Component>
-    <Component class="java.awt.Label" name="productAdministration">
+    <Component class="java.awt.Label" name="label1">
       <Properties>
         <Property name="name" type="java.lang.String" value="" noResource="true"/>
         <Property name="text" type="java.lang.String" value="Product Administration"/>

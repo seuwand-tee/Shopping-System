@@ -9,12 +9,13 @@ package gui;
  *
  * @author teewa743
  */
-public class MainMenu extends javax.swing.JFrame {
+public class MainMenu extends javax.swing.JDialog {
 
 	/**
 	 * Creates new form MainMenu
 	 */
-	public MainMenu() {
+	public MainMenu(java.awt.Frame parent, boolean modal) {
+		super(parent, modal);
 		initComponents();
 	}
 
@@ -27,43 +28,25 @@ public class MainMenu extends javax.swing.JFrame {
    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
    private void initComponents() {
 
-      jPanel1 = new javax.swing.JPanel();
-      newProduct = new javax.swing.JButton();
-      viewProduct = new javax.swing.JButton();
-      exitButton = new javax.swing.JButton();
-      productAdministration = new java.awt.Label();
-
-      jPanel1.setName("jPanel1"); // NOI18N
-
-      javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-      jPanel1.setLayout(jPanel1Layout);
-      jPanel1Layout.setHorizontalGroup(
-         jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-         .addGap(0, 100, Short.MAX_VALUE)
-      );
-      jPanel1Layout.setVerticalGroup(
-         jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-         .addGap(0, 100, Short.MAX_VALUE)
-      );
+      jButton1 = new javax.swing.JButton();
+      jButton2 = new javax.swing.JButton();
+      jButton3 = new javax.swing.JButton();
+      label1 = new java.awt.Label();
 
       setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-      newProduct.setText("Add a New Product");
-      newProduct.setName("newProduct"); // NOI18N
+      jButton1.setText("Add a New Product");
+      jButton1.setActionCommand("Add a New Product");
+      jButton1.setName("jButton1"); // NOI18N
 
-      viewProduct.setText("View Products");
-      viewProduct.setName("viewProduct"); // NOI18N
+      jButton2.setText("View Products");
+      jButton2.setName("jButton2"); // NOI18N
 
-      exitButton.setText("Exit");
-      exitButton.setName("exitButton"); // NOI18N
-      exitButton.addActionListener(new java.awt.event.ActionListener() {
-         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            exitButtonActionPerformed(evt);
-         }
-      });
+      jButton3.setText("Exit");
+      jButton3.setName("jButton3"); // NOI18N
 
-      productAdministration.setName(""); // NOI18N
-      productAdministration.setText("Product Administration");
+      label1.setName(""); // NOI18N
+      label1.setText("Product Administration");
 
       javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
       getContentPane().setLayout(layout);
@@ -72,33 +55,29 @@ public class MainMenu extends javax.swing.JFrame {
          .addGroup(layout.createSequentialGroup()
             .addGap(102, 102, 102)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-               .addComponent(productAdministration, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+               .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                  .addComponent(newProduct, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
-                  .addComponent(viewProduct, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                  .addComponent(exitButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                  .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+                  .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                  .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
             .addContainerGap(82, Short.MAX_VALUE))
       );
       layout.setVerticalGroup(
          layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
          .addGroup(layout.createSequentialGroup()
             .addGap(29, 29, 29)
-            .addComponent(productAdministration, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(newProduct)
+            .addComponent(jButton1)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(viewProduct)
+            .addComponent(jButton2)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(exitButton)
+            .addComponent(jButton3)
             .addContainerGap(87, Short.MAX_VALUE))
       );
 
       pack();
    }// </editor-fold>//GEN-END:initComponents
-
-   private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
-   System.exit(0);
-   }//GEN-LAST:event_exitButtonActionPerformed
 
 	/**
 	 * @param args the command line arguments
@@ -130,7 +109,7 @@ public class MainMenu extends javax.swing.JFrame {
 		/* Create and display the dialog */
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				MainMenu dialog = new MainMenu();
+				MainMenu dialog = new MainMenu(new javax.swing.JFrame(), true);
 				dialog.addWindowListener(new java.awt.event.WindowAdapter() {
 					@Override
 					public void windowClosing(java.awt.event.WindowEvent e) {
@@ -143,10 +122,9 @@ public class MainMenu extends javax.swing.JFrame {
 	}
 
    // Variables declaration - do not modify//GEN-BEGIN:variables
-   private javax.swing.JButton exitButton;
-   private javax.swing.JPanel jPanel1;
-   private javax.swing.JButton newProduct;
-   private java.awt.Label productAdministration;
-   private javax.swing.JButton viewProduct;
+   private javax.swing.JButton jButton1;
+   private javax.swing.JButton jButton2;
+   private javax.swing.JButton jButton3;
+   private java.awt.Label label1;
    // End of variables declaration//GEN-END:variables
 }
