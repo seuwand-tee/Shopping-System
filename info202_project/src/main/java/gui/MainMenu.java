@@ -44,6 +44,11 @@ public class MainMenu extends javax.swing.JFrame {
 
       viewProductButton.setText("View Products");
       viewProductButton.setName("viewProductButton"); // NOI18N
+      viewProductButton.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+            viewProductButtonActionPerformed(evt);
+         }
+      });
 
       exitButton.setText("Exit");
       exitButton.setName("exitButton"); // NOI18N
@@ -88,12 +93,20 @@ public class MainMenu extends javax.swing.JFrame {
    }// </editor-fold>//GEN-END:initComponents
 
    private void addProductButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addProductButtonActionPerformed
-      // TODO add your handling code here:
+      ProductEditor productEditor = new ProductEditor(this, true);
+		productEditor.setLocationRelativeTo(this);
+		productEditor.setVisible(true);
    }//GEN-LAST:event_addProductButtonActionPerformed
 
    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
      System.exit(0);
    }//GEN-LAST:event_exitButtonActionPerformed
+
+   private void viewProductButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewProductButtonActionPerformed
+   ViewProduct viewproduct = new ViewProduct(this, true);
+	viewproduct.setLocationRelativeTo(this);
+	viewproduct.setVisible(true);
+   }//GEN-LAST:event_viewProductButtonActionPerformed
 
 	/**
 	 * @param args the command line arguments
