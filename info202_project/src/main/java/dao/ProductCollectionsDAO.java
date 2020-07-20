@@ -5,7 +5,9 @@
  */
 package dao;
 
+import domain.Product;
 import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  *
@@ -13,17 +15,17 @@ import java.util.ArrayList;
  */
 public class ProductCollectionsDAO {
 	private static Collection<domain.Product> products= new ArrayList<domain.Product>();
-	private static domain.Product item = new domain.Product();
 
-public static void saveProduct(){
-	products.add();
+
+public void saveProduct(Product p){
+	products.add(p);
 }
 
-public ArrayList getProduct(){
+public Collection<domain.Product> getProduct(){
 return products;
 }
 
-public static void deleteProduct(){
-	products.remove();
+public void deleteProduct(Product p){
+	products.remove(p);
 }
 }
