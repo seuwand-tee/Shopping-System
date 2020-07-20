@@ -11,6 +11,7 @@ package gui;
  */
 public class ViewProduct extends javax.swing.JDialog {
 
+	//dao.ProductCollectionsDAO products = new dao.ProductCollectionsDAO();
 	/**
 	 * Creates new form ViewProduct
 	 */
@@ -130,13 +131,12 @@ public class ViewProduct extends javax.swing.JDialog {
                .addComponent(filterlabel)
                .addComponent(filtercombobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                .addComponent(editButton)
                .addComponent(deleteButton)
-               .addComponent(closeButton))
-            .addGap(0, 0, Short.MAX_VALUE))
+               .addComponent(closeButton)))
       );
 
       pack();
