@@ -83,9 +83,19 @@ public class ProductEditor extends javax.swing.JDialog {
 
       saveButton.setText("Save");
       saveButton.setName("saveButton"); // NOI18N
+      saveButton.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+            saveButtonActionPerformed(evt);
+         }
+      });
 
       cancelButton.setText("Cancel");
       cancelButton.setName("cancelButton"); // NOI18N
+      cancelButton.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+            cancelButtonActionPerformed(evt);
+         }
+      });
 
       javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
       getContentPane().setLayout(layout);
@@ -152,6 +162,21 @@ public class ProductEditor extends javax.swing.JDialog {
 
       pack();
    }// </editor-fold>//GEN-END:initComponents
+
+   private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+		String id = txtId.getText();
+		String name = txtName.getText();
+		String desciption = txtDescription.getSelectedText();
+		String category = txtCategory.getText();
+		String price = txtPrice.getText();
+		String quantity = txtQuantity.getText();
+		String p = String.valueOf(price);
+		String q = String.valueOf(quantity);
+   }//GEN-LAST:event_saveButtonActionPerformed
+
+   private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+      dispose();
+   }//GEN-LAST:event_cancelButtonActionPerformed
 
 	/**
 	 * @param args the command line arguments
