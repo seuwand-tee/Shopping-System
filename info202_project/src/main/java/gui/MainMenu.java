@@ -9,13 +9,12 @@ package gui;
  *
  * @author teewa743
  */
-public class MainMenu extends javax.swing.JDialog {
+public class MainMenu extends javax.swing.JFrame {
 
 	/**
 	 * Creates new form MainMenu
 	 */
-	public MainMenu(java.awt.Frame parent, boolean modal) {
-		super(parent, modal);
+	public MainMenu() {
 		initComponents();
 	}
 
@@ -28,22 +27,31 @@ public class MainMenu extends javax.swing.JDialog {
    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
    private void initComponents() {
 
-      jButton1 = new javax.swing.JButton();
-      jButton2 = new javax.swing.JButton();
-      jButton3 = new javax.swing.JButton();
+      addProductButton = new javax.swing.JButton();
+      viewProductButton = new javax.swing.JButton();
+      exitButton = new javax.swing.JButton();
       label1 = new java.awt.Label();
 
       setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-      jButton1.setText("Add a New Product");
-      jButton1.setActionCommand("Add a New Product");
-      jButton1.setName("jButton1"); // NOI18N
+      addProductButton.setText("Add a New Product");
+      addProductButton.setName("addProductButton"); // NOI18N
+      addProductButton.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+            addProductButtonActionPerformed(evt);
+         }
+      });
 
-      jButton2.setText("View Products");
-      jButton2.setName("jButton2"); // NOI18N
+      viewProductButton.setText("View Products");
+      viewProductButton.setName("viewProductButton"); // NOI18N
 
-      jButton3.setText("Exit");
-      jButton3.setName("jButton3"); // NOI18N
+      exitButton.setText("Exit");
+      exitButton.setName("exitButton"); // NOI18N
+      exitButton.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+            exitButtonActionPerformed(evt);
+         }
+      });
 
       label1.setName(""); // NOI18N
       label1.setText("Product Administration");
@@ -57,9 +65,9 @@ public class MainMenu extends javax.swing.JDialog {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                  .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
-                  .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                  .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                  .addComponent(addProductButton, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+                  .addComponent(viewProductButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                  .addComponent(exitButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
             .addContainerGap(82, Short.MAX_VALUE))
       );
       layout.setVerticalGroup(
@@ -68,16 +76,24 @@ public class MainMenu extends javax.swing.JDialog {
             .addGap(29, 29, 29)
             .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jButton1)
+            .addComponent(addProductButton)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jButton2)
+            .addComponent(viewProductButton)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jButton3)
+            .addComponent(exitButton)
             .addContainerGap(87, Short.MAX_VALUE))
       );
 
       pack();
    }// </editor-fold>//GEN-END:initComponents
+
+   private void addProductButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addProductButtonActionPerformed
+      // TODO add your handling code here:
+   }//GEN-LAST:event_addProductButtonActionPerformed
+
+   private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
+     System.exit(0);
+   }//GEN-LAST:event_exitButtonActionPerformed
 
 	/**
 	 * @param args the command line arguments
@@ -109,7 +125,7 @@ public class MainMenu extends javax.swing.JDialog {
 		/* Create and display the dialog */
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				MainMenu dialog = new MainMenu(new javax.swing.JFrame(), true);
+				MainMenu dialog = new MainMenu();
 				dialog.addWindowListener(new java.awt.event.WindowAdapter() {
 					@Override
 					public void windowClosing(java.awt.event.WindowEvent e) {
@@ -122,9 +138,9 @@ public class MainMenu extends javax.swing.JDialog {
 	}
 
    // Variables declaration - do not modify//GEN-BEGIN:variables
-   private javax.swing.JButton jButton1;
-   private javax.swing.JButton jButton2;
-   private javax.swing.JButton jButton3;
+   private javax.swing.JButton addProductButton;
+   private javax.swing.JButton exitButton;
    private java.awt.Label label1;
+   private javax.swing.JButton viewProductButton;
    // End of variables declaration//GEN-END:variables
 }

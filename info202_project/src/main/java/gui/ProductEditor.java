@@ -5,6 +5,8 @@
  */
 package gui;
 
+import java.math.BigDecimal;
+
 /**
  *
  * @author teewa743
@@ -17,6 +19,7 @@ public class ProductEditor extends javax.swing.JDialog {
 	public ProductEditor(java.awt.Frame parent, boolean modal) {
 		super(parent, modal);
 		initComponents();
+		categorycombobox.setEditable(true);
 	}
 
 	/**
@@ -36,13 +39,13 @@ public class ProductEditor extends javax.swing.JDialog {
       productQuantity = new javax.swing.JLabel();
       txtId = new javax.swing.JTextField();
       txtName = new javax.swing.JTextField();
-      txtCategory = new javax.swing.JTextField();
       scrollDescription = new javax.swing.JScrollPane();
       txtDescription = new javax.swing.JTextArea();
       txtPrice = new javax.swing.JTextField();
       txtQuantity = new javax.swing.JTextField();
       saveButton = new javax.swing.JButton();
       cancelButton = new javax.swing.JButton();
+      categorycombobox = new javax.swing.JComboBox<>();
 
       setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -67,8 +70,6 @@ public class ProductEditor extends javax.swing.JDialog {
       txtId.setName("txtId"); // NOI18N
 
       txtName.setName("txtName"); // NOI18N
-
-      txtCategory.setName("txtCategory"); // NOI18N
 
       scrollDescription.setName("scrollDescription"); // NOI18N
 
@@ -97,6 +98,8 @@ public class ProductEditor extends javax.swing.JDialog {
          }
       });
 
+      categorycombobox.setName("categorycombobox"); // NOI18N
+
       javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
       getContentPane().setLayout(layout);
       layout.setHorizontalGroup(
@@ -114,10 +117,10 @@ public class ProductEditor extends javax.swing.JDialog {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                .addComponent(txtId)
                .addComponent(txtName)
-               .addComponent(txtCategory)
                .addComponent(scrollDescription, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
                .addComponent(txtPrice)
-               .addComponent(txtQuantity))
+               .addComponent(txtQuantity)
+               .addComponent(categorycombobox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addContainerGap())
          .addGroup(layout.createSequentialGroup()
             .addGap(96, 96, 96)
@@ -141,12 +144,12 @@ public class ProductEditor extends javax.swing.JDialog {
                .addGroup(layout.createSequentialGroup()
                   .addComponent(productDescription)
                   .addGap(0, 0, Short.MAX_VALUE))
-               .addComponent(scrollDescription, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
+               .addComponent(scrollDescription, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-               .addComponent(txtCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-               .addComponent(productCategory))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+               .addComponent(productCategory)
+               .addComponent(categorycombobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGap(15, 15, 15)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                .addComponent(productPrice)
                .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -166,12 +169,19 @@ public class ProductEditor extends javax.swing.JDialog {
    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
 		String id = txtId.getText();
 		String name = txtName.getText();
-		String desciption = txtDescription.getSelectedText();
-		String category = txtCategory.getText();
+		String description = txtDescription.getText();
+		String category = (String) categorycombobox.getSelectedItem();
 		String price = txtPrice.getText();
 		String quantity = txtQuantity.getText();
-		String p = String.valueOf(price);
-		String q = String.valueOf(quantity);
+		BigDecimal p = new BigDecimal(price);
+		BigDecimal q = new BigDecimal(quantity);
+		domain.Product product = new domain.Product();
+		product.setProduct_id(id);
+		product.setList_price(p);
+		product.setName(name);
+		product.setCategory(category);
+		product.setDescription(description);
+		product.setQuantity_in_stock(q);
    }//GEN-LAST:event_saveButtonActionPerformed
 
    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
@@ -222,6 +232,7 @@ public class ProductEditor extends javax.swing.JDialog {
 
    // Variables declaration - do not modify//GEN-BEGIN:variables
    private javax.swing.JButton cancelButton;
+   private javax.swing.JComboBox<String> categorycombobox;
    private javax.swing.JLabel productCategory;
    private javax.swing.JLabel productDescription;
    private javax.swing.JLabel productID;
@@ -230,7 +241,6 @@ public class ProductEditor extends javax.swing.JDialog {
    private javax.swing.JLabel productQuantity;
    private javax.swing.JButton saveButton;
    private javax.swing.JScrollPane scrollDescription;
-   private javax.swing.JTextField txtCategory;
    private javax.swing.JTextArea txtDescription;
    private javax.swing.JTextField txtId;
    private javax.swing.JTextField txtName;

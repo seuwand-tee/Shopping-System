@@ -37,10 +37,10 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="txtId" alignment="0" max="32767" attributes="0"/>
                   <Component id="txtName" alignment="0" max="32767" attributes="0"/>
-                  <Component id="txtCategory" alignment="0" max="32767" attributes="0"/>
                   <Component id="scrollDescription" alignment="0" pref="250" max="32767" attributes="0"/>
                   <Component id="txtPrice" alignment="0" max="32767" attributes="0"/>
                   <Component id="txtQuantity" alignment="0" max="32767" attributes="0"/>
+                  <Component id="categorycombobox" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -71,14 +71,14 @@
                       <Component id="productDescription" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="scrollDescription" pref="100" max="32767" attributes="0"/>
+                  <Component id="scrollDescription" pref="95" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="txtCategory" min="-2" max="-2" attributes="0"/>
-                  <Component id="productCategory" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="productCategory" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="categorycombobox" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="productPrice" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtPrice" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -144,11 +144,6 @@
         <Property name="name" type="java.lang.String" value="txtName" noResource="true"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtCategory">
-      <Properties>
-        <Property name="name" type="java.lang.String" value="txtCategory" noResource="true"/>
-      </Properties>
-    </Component>
     <Container class="javax.swing.JScrollPane" name="scrollDescription">
       <Properties>
         <Property name="name" type="java.lang.String" value="scrollDescription" noResource="true"/>
@@ -192,6 +187,14 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cancelButtonActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="categorycombobox">
+      <Properties>
+        <Property name="name" type="java.lang.String" value="categorycombobox" noResource="true"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>
