@@ -34,12 +34,12 @@ public class ViewProduct extends javax.swing.JDialog {
       filterlabel = new javax.swing.JLabel();
       txtID = new javax.swing.JTextField();
       searchButton = new javax.swing.JButton();
-      filtercombobox = new javax.swing.JComboBox<>();
       editButton = new javax.swing.JButton();
       deleteButton = new javax.swing.JButton();
       closeButton = new javax.swing.JButton();
       jScrollPane2 = new javax.swing.JScrollPane();
       jList1 = new javax.swing.JList<>();
+      filtercombobox = new javax.swing.JComboBox<>();
 
       setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -62,9 +62,6 @@ public class ViewProduct extends javax.swing.JDialog {
          }
       });
 
-      filtercombobox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All" }));
-      filtercombobox.setName("filtercombobox"); // NOI18N
-
       editButton.setText("Edit");
       editButton.setName("editButton"); // NOI18N
 
@@ -84,37 +81,46 @@ public class ViewProduct extends javax.swing.JDialog {
       jList1.setName("jList1"); // NOI18N
       jScrollPane2.setViewportView(jList1);
 
+      filtercombobox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+      filtercombobox.setName("filtercombobox"); // NOI18N
+
       javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
       getContentPane().setLayout(layout);
       layout.setHorizontalGroup(
          layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
          .addGroup(layout.createSequentialGroup()
-            .addGap(137, 137, 137)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-               .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                  .addComponent(viewProduct, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                  .addContainerGap())
                .addGroup(layout.createSequentialGroup()
                   .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                      .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addComponent(editButton)
-                        .addGap(124, 124, 124)
-                        .addComponent(deleteButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(closeButton))
-                     .addComponent(jScrollPane2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                           .addComponent(filterlabel)
-                           .addComponent(searchID))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                           .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                              .addComponent(txtID)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                           .addGroup(layout.createSequentialGroup()
+                              .addGap(131, 131, 131)
+                              .addComponent(jScrollPane2))
+                           .addGroup(layout.createSequentialGroup()
+                              .addContainerGap(14, Short.MAX_VALUE)
+                              .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                 .addComponent(searchID, javax.swing.GroupLayout.Alignment.TRAILING)
+                                 .addComponent(filterlabel, javax.swing.GroupLayout.Alignment.TRAILING))
                               .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                              .addComponent(searchButton))
-                           .addComponent(filtercombobox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                  .addGap(6, 6, 6))))
+                              .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                 .addComponent(filtercombobox, 0, 632, Short.MAX_VALUE)
+                                 .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 624, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                  .addComponent(deleteButton)
+                  .addGap(287, 287, 287)
+                  .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                     .addComponent(closeButton)
+                     .addComponent(searchButton))
+                  .addGap(8, 8, 8))
+               .addGroup(layout.createSequentialGroup()
+                  .addGap(341, 341, 341)
+                  .addComponent(viewProduct, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addContainerGap())
       );
       layout.setVerticalGroup(
          layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,21 +128,25 @@ public class ViewProduct extends javax.swing.JDialog {
             .addContainerGap()
             .addComponent(viewProduct)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                .addComponent(searchID)
-               .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-               .addComponent(searchButton))
+               .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                  .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                  .addComponent(searchButton)))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                .addComponent(filterlabel)
                .addComponent(filtercombobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-               .addComponent(editButton)
-               .addComponent(deleteButton)
-               .addComponent(closeButton)))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+               .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                  .addComponent(closeButton)
+                  .addComponent(deleteButton))
+               .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                  .addComponent(editButton)
+                  .addContainerGap())))
       );
 
       pack();
