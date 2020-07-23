@@ -11,7 +11,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.hamcrest.CoreMatchers.hasItem;
-import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 
 /**
@@ -26,6 +25,7 @@ public class ProductCollectionsDAOTest {
 	
 	@BeforeEach
 	public void setUp() {
+		products = new dao.ProductCollectionsDAO();
 		product = new domain.Product();
 		product.setCategory("category");
 		product.setDescription("description");
@@ -60,7 +60,6 @@ public class ProductCollectionsDAOTest {
 
 	@Test
 	public void testSaveProduct() {
-		products = new ProductCollectionsDAO();
 		products.saveProduct(product);
 		assertThat(products.getProduct(), hasItem(product));
 	}
