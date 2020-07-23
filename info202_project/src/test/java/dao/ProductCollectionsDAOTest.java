@@ -6,12 +6,13 @@
 package dao;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Collection;
+import static org.hamcrest.MatcherAssert.assertThat;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.hamcrest.CoreMatchers.hasItem;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
 
 /**
  *
@@ -21,7 +22,7 @@ public class ProductCollectionsDAOTest {
 	private domain.Product product;
 	private domain.Product item;
 	private domain.Product stock;
-	private static Collection<domain.Product> items = new ArrayList<domain.Product>();
+	private static dao.ProductCollectionsDAO products;
 	
 	@BeforeEach
 	public void setUp() {
@@ -46,30 +47,36 @@ public class ProductCollectionsDAOTest {
 		stock.setProductName("Widget2");
 		stock.setListPrice(new BigDecimal(102));
 		stock.setQuantityInStock(new BigDecimal(52));
-		items.add(item);
-		items.add(stock);
+		products.saveProduct(item);
+		products.saveProduct(stock);
 		
 	}
 	
 	@AfterEach
 	public void tearDown() {
-		items.remove(item);
-		items.remove(stock);
+		products.deleteProduct(item);
+		products.deleteProduct(stock);
 	}
 
 	@Test
 	public void testSaveProduct() {
-		fail();
+		products = new ProductCollectionsDAO();
+		products.saveProduct(product);
+		assertThat(products.getProduct(), hasItem(product));
 	}
 
 	@Test
 	public void testGetProduct() {
-		fail();
+	assertThat(products.getProduct(), hasItem(item));
+	assertThat(products.getProduct(), hasItem(stock));
 	}
 
 	@Test
 	public void testDeleteProduct() {
-		fail();
+		products.deleteProduct(item);
+		assertThat(products.getProduct(), not(hasItem(item)));
+		products.deleteProduct(stock);
+		assertThat(products.getProduct(), not(hasItem(stock)));
 	}
 	
 }
