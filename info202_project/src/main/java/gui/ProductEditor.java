@@ -12,7 +12,7 @@ import java.math.BigDecimal;
  * @author teewa743
  */
 public class ProductEditor extends javax.swing.JDialog {
-
+dao.ProductCollectionsDAO productsList = new dao.ProductCollectionsDAO();
 	/**
 	 * Creates new form ProductEditor
 	 */
@@ -191,8 +191,7 @@ public class ProductEditor extends javax.swing.JDialog {
 		product.setCategory(category);
 		product.setDescription(description);
 		product.setQuantityInStock(q);
-		//dao.ProductCollectionsDAO productsList = new dao.ProductCollectionsDAO();
-		//productsList.saveProduct();
+		productsList.saveProduct(product);
 		dispose();
    }//GEN-LAST:event_saveButtonActionPerformed
 
