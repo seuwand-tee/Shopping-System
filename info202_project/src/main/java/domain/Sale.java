@@ -20,8 +20,6 @@ public class Sale {
 	private String status;
 	private Customer customer;
 	private Collection<SaleItem> items = new ArrayList<>();
-	
-	// relationship fields (getters/.setters)
 
 	public Sale() {
 	}

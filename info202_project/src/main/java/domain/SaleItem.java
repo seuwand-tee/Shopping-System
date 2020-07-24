@@ -15,10 +15,23 @@ public class SaleItem {
 	private BigDecimal quantity_purchased;
 	private BigDecimal sale_price;
 	private Product product;
-	
-	public SaleItem(BigDecimal quantity_purchased, BigDecimal sale_price) {
+
+	public SaleItem() {
+	}
+
+	public SaleItem(BigDecimal quantity_purchased, BigDecimal sale_price, Product product) {
 		this.quantity_purchased = quantity_purchased;
 		this.sale_price = sale_price;
+		this.product = product;
+	}
+	
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 	
 		public BigDecimal getItemTotal(){
