@@ -14,7 +14,8 @@ import java.math.BigDecimal;
 public class SaleItem {
 	private BigDecimal quantity_purchased;
 	private BigDecimal sale_price;
-
+	private Product product;
+	
 	public SaleItem(BigDecimal quantity_purchased, BigDecimal sale_price) {
 		this.quantity_purchased = quantity_purchased;
 		this.sale_price = sale_price;

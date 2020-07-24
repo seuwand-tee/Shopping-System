@@ -6,6 +6,7 @@
 package gui;
 
 import java.math.BigDecimal;
+import java.util.Collection;
 
 /**
  *
@@ -13,6 +14,7 @@ import java.math.BigDecimal;
  */
 public class ProductEditor extends javax.swing.JDialog {
 dao.ProductCollectionsDAO productsList = new dao.ProductCollectionsDAO();
+helpers.SimpleListModel productsModel = new helpers.SimpleListModel();
 	/**
 	 * Creates new form ProductEditor
 	 */
@@ -20,6 +22,9 @@ dao.ProductCollectionsDAO productsList = new dao.ProductCollectionsDAO();
 		super(parent, modal);
 		initComponents();
 		categorycombobox.setEditable(true);
+		Collection<String> categories= productsList.getCategories();
+		productsModel.updateItems(categories);
+		categorycombobox.setModel(productsModel);
 	}
 
 	/**

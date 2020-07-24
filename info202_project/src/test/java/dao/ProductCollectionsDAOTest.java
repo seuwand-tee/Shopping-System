@@ -12,17 +12,19 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.Matchers.hasSize;
 
 /**
  *
  * @author teewa743
  */
 public class ProductCollectionsDAOTest {
+
 	private domain.Product product;
 	private domain.Product item;
 	private domain.Product stock;
 	private static dao.ProductCollectionsDAO products;
-	
+
 	@BeforeEach
 	public void setUp() {
 		products = new dao.ProductCollectionsDAO();
@@ -49,13 +51,14 @@ public class ProductCollectionsDAOTest {
 		stock.setQuantityInStock(new BigDecimal(52));
 		products.saveProduct(item);
 		products.saveProduct(stock);
-		
+
 	}
-	
+
 	@AfterEach
 	public void tearDown() {
 		products.deleteProduct(item);
 		products.deleteProduct(stock);
+		products.deleteProduct(product);
 	}
 
 	@Test
@@ -66,16 +69,28 @@ public class ProductCollectionsDAOTest {
 
 	@Test
 	public void testGetProduct() {
-	assertThat(products.getProduct(), hasItem(item));
-	assertThat(products.getProduct(), hasItem(stock));
+		assertThat(products.getProduct(), hasItem(item));
+		assertThat(products.getProduct(), hasItem(stock));
+		assertThat(products.getProduct(), hasSize(2));
 	}
 
 	@Test
 	public void testDeleteProduct() {
+		assertThat(products.getProduct(), hasItem(item));
 		products.deleteProduct(item);
 		assertThat(products.getProduct(), not(hasItem(item)));
+
+		assertThat(products.getProduct(), hasItem(stock));
 		products.deleteProduct(stock);
 		assertThat(products.getProduct(), not(hasItem(stock)));
+		assertThat(products.getProduct(), hasSize(0));
 	}
-	
+
+	@Test
+	public void testGetCategories() {
+		assertThat(products.getCategories(), hasItem(item.getCategory()));
+		assertThat(products.getCategories(), hasItem(stock.getCategory()));
+		assertThat(products.getProduct(), hasSize(2));
+	}
+
 }

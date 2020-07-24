@@ -7,6 +7,8 @@ package domain;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  *
@@ -16,6 +18,10 @@ public class Sale {
 	private Integer sale_id;
 	private LocalDateTime date;
 	private String status;
+	private Customer customer;
+	private Collection<SaleItem> items = new ArrayList<>();
+	
+	// relationship fields (getters/.setters)
 
 	public Sale(Integer sale_id, LocalDateTime date, String status) {
 		this.sale_id = sale_id;
@@ -24,6 +30,9 @@ public class Sale {
 	}
 	
 	public BigDecimal getTotal(){
+		
+		// loop through all sale items, calling getItemTotal() and summing together
+		
 		BigDecimal total = new BigDecimal(0);
 		return total;
 }
