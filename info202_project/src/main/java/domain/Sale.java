@@ -23,21 +23,43 @@ public class Sale {
 	
 	// relationship fields (getters/.setters)
 
-	public Sale(Integer sale_id, LocalDateTime date, String status) {
+	public Sale() {
+	}
+
+	public Sale(Integer sale_id, LocalDateTime date, String status, Customer customer) {
 		this.sale_id = sale_id;
 		this.date = date;
 		this.status = status;
+		this.customer = customer;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	public Collection<SaleItem> getItems() {
+		return items;
+	}
+
+	public void setItems(Collection<SaleItem> items) {
+		this.items = items;
 	}
 	
 	public BigDecimal getTotal(){
 		
 		// loop through all sale items, calling getItemTotal() and summing together
-		
 		BigDecimal total = new BigDecimal(0);
+		for (SaleItem s : items) {
+		total.add(s.getItemTotal());
+		}
 		return total;
 }
 	public void addItem(SaleItem saleitem){
-		
+		items.add(saleitem);
 	}
 
 	public Integer getSale_id() {
