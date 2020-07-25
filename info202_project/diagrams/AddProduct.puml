@@ -45,8 +45,8 @@ productEditor -> ProductCollectionsDAO++ :getCategory()
 productEditor++
 ProductCollectionsDAO --> productEditor :category
 ProductCollectionsDAO--
-productEditor -> SimpleListModel++:updateItems();
-SimpleListModel -> productEditor :setModel();
+productEditor -> SimpleListModel++:updateItems(categories);
+SimpleListModel -> productEditor :setModel(productsModel);
 productEditor -> productEditor :dispose();
 destroy productEditor 
 productEditor --> menu

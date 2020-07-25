@@ -31,7 +31,7 @@ ViewProduct -> ProductCollectionsDAO++ :getProduct()
 ViewProduct++
 ProductCollectionsDAO --> ViewProduct :products
 ProductCollectionsDAO--
-ViewProduct -> SimpleListModel++:updateItems();
-SimpleListModel -> ViewProduct :setModel();
+ViewProduct -> SimpleListModel++:updateItems(products);
+SimpleListModel -> ViewProduct :setModel(productsModel);
 
 @enduml
