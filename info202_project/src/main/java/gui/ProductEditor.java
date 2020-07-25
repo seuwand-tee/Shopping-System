@@ -15,6 +15,7 @@ import java.util.Collection;
 public class ProductEditor extends javax.swing.JDialog {
 dao.ProductCollectionsDAO productsList = new dao.ProductCollectionsDAO();
 helpers.SimpleListModel productsModel = new helpers.SimpleListModel();
+
 	/**
 	 * Creates new form ProductEditor
 	 */
@@ -25,6 +26,7 @@ helpers.SimpleListModel productsModel = new helpers.SimpleListModel();
 		Collection<String> categories= productsList.getCategories();
 		productsModel.updateItems(categories);
 		categorycombobox.setModel(productsModel);
+		
 	}
 
 	/**

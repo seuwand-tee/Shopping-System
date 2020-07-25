@@ -1,0 +1,26 @@
+@startuml
+skinparam {
+  Style StrictUML
+  SequenceStereotype {
+    Font {
+      Size 10
+      Style plain
+    }
+  }
+}
+actor "User" as user
+participant "MainMenu" as menu <<gui>>
+participant "ViewProduct" as ViewProduct <<gui>>
+participant "product : Product" as product <<domain>>
+participant "productsList: ProductCollectionsDAO" as ProductCollectionsDAO <<dao>>
+participant "productsModel: SimpleListModel" as SimpleListModel <<helpers>>
+
+'create the product viewer menu
+user -> menu++ : clicks the "View Product" button
+create ViewProduct
+menu -> ViewProduct : <<construct>>
+menu--
+
+create ProductCollectionsDAO
+ViewProduct -> ProductCollectionsDAO : <<construct>>
+@enduml

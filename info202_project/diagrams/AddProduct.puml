@@ -1,0 +1,51 @@
+@startuml
+skinparam {
+  Style StrictUML
+  SequenceStereotype {
+    Font {
+      Size 10
+      Style plain
+    }
+  }
+}
+actor "User" as user
+participant "MainMenu" as menu <<gui>>
+participant "ProductEditor" as productEditor <<gui>>
+participant "product : Product" as product <<domain>>
+participant "productsList: ProductCollectionsDAO" as ProductCollectionsDAO <<dao>>
+participant "productsModel: SimpleListModel" as SimpleListModel <<helpers>>
+
+
+'create the product editor menu
+' user clicks the view a product button
+user -> menu++ : clicks the "Add a product" button
+create productEditor
+menu -> productEditor : <<construct>>
+
+menu--
+
+user -> productEditor++ : Enter product details
+create ProductCollectionsDAO
+productEditor -> ProductCollectionsDAO : <<construct>>
+create SimpleListModel
+productEditor -> SimpleListModel : <<construct>>
+productEditor--
+
+user -> productEditor++ : Clicks "save" button
+productEditor --> productEditor: getText()
+productEditor --> productEditor: getSelectedItem()
+create product
+productEditor -> product: <<construct>>
+'user enter variables
+productEditor -> product++ :set variables 
+product--
+
+productEditor -> ProductCollectionsDAO++ : saveProduct(product)
+productEditor--
+
+ProductCollectionsDAO -> productEditor++ :getCategories();
+productEditor -> SimpleListModel++ :updateItems();
+SimpleListModel -> productEditor :setModel();
+productEditor -> user
+productEditor--
+@enduml
