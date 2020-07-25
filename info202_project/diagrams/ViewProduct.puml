@@ -11,7 +11,6 @@ skinparam {
 actor "User" as user
 participant "MainMenu" as menu <<gui>>
 participant "ViewProduct" as ViewProduct <<gui>>
-participant "product : Product" as product <<domain>>
 participant "productsList: ProductCollectionsDAO" as ProductCollectionsDAO <<dao>>
 participant "productsModel: SimpleListModel" as SimpleListModel <<helpers>>
 
@@ -21,6 +20,18 @@ create ViewProduct
 menu -> ViewProduct : <<construct>>
 menu--
 
+ViewProduct++
 create ProductCollectionsDAO
 ViewProduct -> ProductCollectionsDAO : <<construct>>
+create SimpleListModel
+ViewProduct -> SimpleListModel : <<construct>>
+ViewProduct--
+
+ViewProduct -> ProductCollectionsDAO++ :getProduct()
+ViewProduct++
+ProductCollectionsDAO --> ViewProduct :products
+ProductCollectionsDAO--
+ViewProduct -> SimpleListModel++:updateItems();
+SimpleListModel -> ViewProduct :setModel();
+
 @enduml

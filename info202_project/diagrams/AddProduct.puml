@@ -11,7 +11,7 @@ skinparam {
 actor "User" as user
 participant "MainMenu" as menu <<gui>>
 participant "ProductEditor" as productEditor <<gui>>
-participant "product : Product" as product <<domain>>
+participant "product: Product" as product <<domain>>
 participant "productsList: ProductCollectionsDAO" as ProductCollectionsDAO <<dao>>
 participant "productsModel: SimpleListModel" as SimpleListModel <<helpers>>
 
@@ -21,8 +21,6 @@ participant "productsModel: SimpleListModel" as SimpleListModel <<helpers>>
 user -> menu++ : clicks the "Add a product" button
 create productEditor
 menu -> productEditor : <<construct>>
-
-menu--
 
 user -> productEditor++ : Enter product details
 create ProductCollectionsDAO
@@ -43,9 +41,14 @@ product--
 productEditor -> ProductCollectionsDAO++ : saveProduct(product)
 productEditor--
 
-ProductCollectionsDAO -> productEditor++ :getCategories();
-productEditor -> SimpleListModel++ :updateItems();
+productEditor -> ProductCollectionsDAO++ :getCategory()
+productEditor++
+ProductCollectionsDAO --> productEditor :category
+ProductCollectionsDAO--
+productEditor -> SimpleListModel++:updateItems();
 SimpleListModel -> productEditor :setModel();
-productEditor -> user
-productEditor--
+productEditor -> productEditor :dispose();
+destroy productEditor 
+productEditor --> menu
+
 @enduml
