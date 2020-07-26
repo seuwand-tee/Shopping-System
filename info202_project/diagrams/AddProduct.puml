@@ -13,7 +13,7 @@ participant "MainMenu" as menu <<gui>>
 participant "ProductEditor" as productEditor <<gui>>
 participant "product: Product" as product <<domain>>
 participant "productsList: ProductCollectionsDAO" as ProductCollectionsDAO <<dao>>
-participant "productsModel: SimpleListModel" as SimpleListModel <<helpers>>
+participant "categoriesModel: SimpleListModel" as SimpleListModel <<helpers>>
 
 
 'create the product editor menu
@@ -29,9 +29,9 @@ create SimpleListModel
 productEditor -> SimpleListModel : <<construct>>
 productEditor--
 
-productEditor -> ProductCollectionsDAO++ :getCategory()
+productEditor -> ProductCollectionsDAO++ :getCategories()
 productEditor++
-ProductCollectionsDAO --> productEditor :category
+ProductCollectionsDAO --> productEditor :categories
 ProductCollectionsDAO--
 productEditor -> SimpleListModel++:updateItems(categories);
 SimpleListModel--
