@@ -28,6 +28,14 @@ productEditor -> ProductCollectionsDAO : <<construct>>
 create SimpleListModel
 productEditor -> SimpleListModel : <<construct>>
 productEditor--
+productEditor -> ProductCollectionsDAO++ :getCategory()
+productEditor++
+ProductCollectionsDAO --> productEditor :category
+ProductCollectionsDAO--
+productEditor -> SimpleListModel++:updateItems(categories);
+SimpleListModel -> productEditor :setModel(productsModel);
+SimpleListModel--
+productEditor--
 
 user -> productEditor++ : Clicks "save" button
 productEditor --> productEditor: getText()
@@ -39,14 +47,7 @@ productEditor -> product++ :set variables
 product--
 
 productEditor -> ProductCollectionsDAO++ : saveProduct(product)
-productEditor--
-
-productEditor -> ProductCollectionsDAO++ :getCategory()
-productEditor++
-ProductCollectionsDAO --> productEditor :category
 ProductCollectionsDAO--
-productEditor -> SimpleListModel++:updateItems(categories);
-SimpleListModel -> productEditor :setModel(productsModel);
 productEditor -> productEditor :dispose();
 destroy productEditor 
 productEditor --> menu
