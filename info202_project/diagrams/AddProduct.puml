@@ -28,13 +28,14 @@ productEditor -> ProductCollectionsDAO : <<construct>>
 create SimpleListModel
 productEditor -> SimpleListModel : <<construct>>
 productEditor--
+
 productEditor -> ProductCollectionsDAO++ :getCategory()
 productEditor++
 ProductCollectionsDAO --> productEditor :category
 ProductCollectionsDAO--
 productEditor -> SimpleListModel++:updateItems(categories);
-SimpleListModel -> productEditor :setModel(productsModel);
 SimpleListModel--
+productEditor -> productEditor :setModel(productsModel);
 productEditor--
 
 user -> productEditor++ : Clicks "save" button
