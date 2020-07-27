@@ -6,25 +6,31 @@
 package gui;
 
 import java.util.Collection;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author teewa743
  */
 public class ViewProduct extends javax.swing.JDialog {
-	dao.ProductCollectionsDAO productsList = new dao.ProductCollectionsDAO();
+
+	dao.ProductCollectionsDAO productsdao = new dao.ProductCollectionsDAO();
 	helpers.SimpleListModel productsModel = new helpers.SimpleListModel();
-	
+	helpers.SimpleListModel categoriesModel = new helpers.SimpleListModel();
+
 	/**
 	 * Creates new form ViewProduct
 	 */
 	public ViewProduct(java.awt.Frame parent, boolean modal) {
 		super(parent, modal);
 		initComponents();
-		
-		Collection<domain.Product> products= productsList.getProduct();
+
+		Collection<domain.Product> products = productsdao.getProducts();
 		productsModel.updateItems(products);
 		jList1.setModel(productsModel);
+		Collection<String> categories= productsdao.getCategories();
+		categoriesModel.updateItems(categories);
+		filtercombobox.setModel(categoriesModel);
 	}
 
 	/**
@@ -75,6 +81,11 @@ public class ViewProduct extends javax.swing.JDialog {
 
       deleteButton.setText("Delete");
       deleteButton.setName("deleteButton"); // NOI18N
+      deleteButton.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+            deleteButtonActionPerformed(evt);
+         }
+      });
 
       closeButton.setText("Close");
       closeButton.setName("closeButton"); // NOI18N
@@ -91,6 +102,11 @@ public class ViewProduct extends javax.swing.JDialog {
 
       filtercombobox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
       filtercombobox.setName("filtercombobox"); // NOI18N
+      filtercombobox.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+            filtercomboboxActionPerformed(evt);
+         }
+      });
 
       javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
       getContentPane().setLayout(layout);
@@ -150,13 +166,34 @@ public class ViewProduct extends javax.swing.JDialog {
    }// </editor-fold>//GEN-END:initComponents
 
    private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
-	dispose();
+		dispose();
    }//GEN-LAST:event_closeButtonActionPerformed
 
    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
-	String id = txtID.getText();
-	String filter = (String) filtercombobox.getSelectedItem();
+		String id = txtID.getText();
+		productsModel.updateItems(productsdao.searchByID(id));
+		//
    }//GEN-LAST:event_searchButtonActionPerformed
+
+   private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+		if (!jList1.isSelectionEmpty()) {
+			domain.Product deleteProduct = (domain.Product) jList1.getSelectedValue();
+			int result = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete " + deleteProduct + " ?", "Delete Confirmation", JOptionPane.YES_NO_OPTION);
+			if (result == JOptionPane.YES_OPTION) {
+				productsdao.deleteProduct(deleteProduct);
+				productsModel.updateItems(productsdao.getProducts());
+				jList1.clearSelection();
+			}
+		}
+
+
+   }//GEN-LAST:event_deleteButtonActionPerformed
+
+   private void filtercomboboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtercomboboxActionPerformed
+    String filter = (String) filtercombobox.getSelectedItem();
+	 productsModel.updateItems(productsdao.filterByCategory(filter));
+		
+   }//GEN-LAST:event_filtercomboboxActionPerformed
 
 	/**
 	 * @param args the command line arguments
@@ -206,7 +243,7 @@ public class ViewProduct extends javax.swing.JDialog {
    private javax.swing.JButton editButton;
    private javax.swing.JComboBox<String> filtercombobox;
    private javax.swing.JLabel filterlabel;
-   private javax.swing.JList<String> jList1;
+   private javax.swing.JList<domain.Product> jList1;
    private javax.swing.JScrollPane jScrollPane2;
    private javax.swing.JButton searchButton;
    private javax.swing.JLabel searchID;

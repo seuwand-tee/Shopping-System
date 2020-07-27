@@ -12,7 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.not;
-import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.*;
 
 /**
  *
@@ -20,77 +20,89 @@ import static org.hamcrest.Matchers.hasSize;
  */
 public class ProductCollectionsDAOTest {
 
-	private domain.Product product;
-	private domain.Product item;
-	private domain.Product stock;
+	private domain.Product product1;
+	private domain.Product product2;
+	private domain.Product product3;
 	private static dao.ProductCollectionsDAO products;
 
 	@BeforeEach
 	public void setUp() {
 		products = new dao.ProductCollectionsDAO();
-		product = new domain.Product();
-		product.setCategory("category");
-		product.setDescription("description");
-		product.setProductID("item");
-		product.setProductName("Polkadot Widget");
-		product.setListPrice(new BigDecimal(10));
-		product.setQuantityInStock(new BigDecimal(5));
-		item = new domain.Product();
-		item.setCategory("category1");
-		item.setDescription("description1");
-		item.setProductID("item1");
-		item.setProductName("Widget");
-		item.setListPrice(new BigDecimal(101));
-		item.setQuantityInStock(new BigDecimal(51));
-		stock = new domain.Product();
-		stock.setCategory("category2");
-		stock.setDescription("description2");
-		stock.setProductID("item2");
-		stock.setProductName("Widget2");
-		stock.setListPrice(new BigDecimal(102));
-		stock.setQuantityInStock(new BigDecimal(52));
-		products.saveProduct(item);
-		products.saveProduct(stock);
+		product1 = new domain.Product();
+		product1.setCategory("category");
+		product1.setDescription("description");
+		product1.setProductID("product1");
+		product1.setProductName("Polkadot Widget");
+		product1.setListPrice(new BigDecimal(10));
+		product1.setQuantityInStock(new BigDecimal(5));
+		product2 = new domain.Product();
+		product2.setCategory("category1");
+		product2.setDescription("description1");
+		product2.setProductID("product2");
+		product2.setProductName("Widget");
+		product2.setListPrice(new BigDecimal(101));
+		product2.setQuantityInStock(new BigDecimal(51));
+		product3 = new domain.Product();
+		product3.setCategory("category2");
+		product3.setDescription("description2");
+		product3.setProductID("product3");
+		product3.setProductName("Widget2");
+		product3.setListPrice(new BigDecimal(102));
+		product3.setQuantityInStock(new BigDecimal(52));
+		products.saveProduct(product2);
+		products.saveProduct(product3);
 
 	}
 
 	@AfterEach
 	public void tearDown() {
-		products.deleteProduct(item);
-		products.deleteProduct(stock);
-		products.deleteProduct(product);
+		products.deleteProduct(product2);
+		products.deleteProduct(product3);
+		products.deleteProduct(product1);
 	}
 
 	@Test
 	public void testSaveProduct() {
-		products.saveProduct(product);
-		assertThat(products.getProduct(), hasItem(product));
+		products.saveProduct(product1);
+		assertThat(products.getProducts(), hasItem(product1));
 	}
 
 	@Test
 	public void testGetProduct() {
-		assertThat(products.getProduct(), hasItem(item));
-		assertThat(products.getProduct(), hasItem(stock));
-		assertThat(products.getProduct(), hasSize(2));
+		assertThat(products.getProducts(), hasItem(product2));
+		assertThat(products.getProducts(), hasItem(product3));
+		assertThat(products.getProducts(), hasSize(2));
 	}
 
 	@Test
 	public void testDeleteProduct() {
-		assertThat(products.getProduct(), hasItem(item));
-		products.deleteProduct(item);
-		assertThat(products.getProduct(), not(hasItem(item)));
+		assertThat(products.getProducts(), hasItem(product2));
+		products.deleteProduct(product2);
+		assertThat(products.getProducts(), not(hasItem(product2)));
 
-		assertThat(products.getProduct(), hasItem(stock));
-		products.deleteProduct(stock);
-		assertThat(products.getProduct(), not(hasItem(stock)));
-		assertThat(products.getProduct(), hasSize(0));
+		assertThat(products.getProducts(), hasItem(product3));
+		products.deleteProduct(product3);
+		assertThat(products.getProducts(), not(hasItem(product3)));
+		assertThat(products.getProducts(), hasSize(0));
 	}
 
 	@Test
 	public void testGetCategories() {
-		assertThat(products.getCategories(), hasItem(item.getCategory()));
-		assertThat(products.getCategories(), hasItem(stock.getCategory()));
-		assertThat(products.getProduct(), hasSize(2));
+		assertThat(products.getCategories(), hasItem(product2.getCategory()));
+		assertThat(products.getCategories(), hasItem(product3.getCategory()));
+		assertThat(products.getProducts(), hasSize(2));
 	}
-
+	@Test
+	public void testSearchByID() {
+		assertThat(product2, equalTo(products.searchByID("product2")));
+		assertThat(product3, equalTo(products.searchByID("product3")));
+		assertThat(product1, not(equalTo(products.searchByID("product1"))));
+	}
+	@Test
+	public void testFilterByCategory() {
+		assertThat(products.filterByCategory(product2.getCategory()), hasItem(product2));
+		assertThat(products.filterByCategory(product3.getCategory()), hasItem(product3));
+		assertThat(products.filterByCategory(product1.getCategory()), not(hasItem(product1)));
+		
+	}
 }
