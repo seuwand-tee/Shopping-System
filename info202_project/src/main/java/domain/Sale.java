@@ -52,7 +52,7 @@ public class Sale {
 		// loop through all sale items, calling getItemTotal() and summing together
 		BigDecimal total = new BigDecimal(0);
 		for (SaleItem s : items) {
-		total.add(s.getItemTotal());
+		total = total.add(s.getItemTotal());
 		}
 		return total;
 }
