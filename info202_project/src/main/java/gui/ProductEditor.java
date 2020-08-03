@@ -13,7 +13,7 @@ import java.util.Collection;
  * @author teewa743
  */
 public class ProductEditor extends javax.swing.JDialog {
-dao.ProductCollectionsDAO productsList = new dao.ProductCollectionsDAO();
+dao.ProductJdbcDAO productsList = new dao.ProductJdbcDAO();
 helpers.SimpleListModel categoriesModel = new helpers.SimpleListModel();
 
 	/**
