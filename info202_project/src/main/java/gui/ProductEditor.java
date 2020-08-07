@@ -200,13 +200,27 @@ helpers.SimpleListModel categoriesModel = new helpers.SimpleListModel();
 		product.setCategory(category);
 		product.setDescription(description);
 		product.setQuantityInStock(q);
+                new Validator().assertValid(product);
 		productsList.saveProduct(product);
 		dispose();
                 } catch(NumberFormatException e){
                    JOptionPane.showMessageDialog(this,
                    "You have entered a price or quantity that is not a valid number.", 
                     "Input Error", JOptionPane.ERROR_MESSAGE);
-                }
+                } catch (ConstraintsViolatedException ex) {
+
+                   // get the violated constraints from the exception
+                    ConstraintViolation[] violations = ex.getConstraintViolations();
+
+                   // create a nice error message for the user
+                    String msg = "Please fix the following input problems:";
+                    for (ConstraintViolation cv : violations) {
+                       msg += "\n  - " + cv.getMessage();
+                    }
+
+                    // display the message to the user
+                    JOptionPane.showMessageDialog(this, msg, "Input Error", JOptionPane.ERROR_MESSAGE);
+                 }
    }//GEN-LAST:event_saveButtonActionPerformed
 
    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
