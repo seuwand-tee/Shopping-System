@@ -7,6 +7,7 @@ package gui;
 
 import java.math.BigDecimal;
 import java.util.Collection;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -183,7 +184,8 @@ helpers.SimpleListModel categoriesModel = new helpers.SimpleListModel();
    }// </editor-fold>//GEN-END:initComponents
 
    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-		String id = txtId.getText();
+		try{
+                String id = txtId.getText();
 		String name = txtName.getText();
 		String description = txtDescription.getText();
 		String category = (String) categorycombobox.getSelectedItem();
@@ -200,6 +202,11 @@ helpers.SimpleListModel categoriesModel = new helpers.SimpleListModel();
 		product.setQuantityInStock(q);
 		productsList.saveProduct(product);
 		dispose();
+                } catch(NumberFormatException e){
+                   JOptionPane.showMessageDialog(this,
+                   "You have entered a price or quantity that is not a valid number.", 
+                    "Input Error", JOptionPane.ERROR_MESSAGE);
+                }
    }//GEN-LAST:event_saveButtonActionPerformed
 
    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
