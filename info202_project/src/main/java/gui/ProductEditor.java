@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  * @author teewa743
  */
 public class ProductEditor extends javax.swing.JDialog {
-dao.ProductJdbcDAO productsList = new dao.ProductJdbcDAO();
+final dao.ProductJdbcDAO productsList;
 helpers.SimpleListModel categoriesModel = new helpers.SimpleListModel();
 
 	/**
