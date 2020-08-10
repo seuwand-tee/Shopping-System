@@ -1,0 +1,46 @@
+@startuml
+@startuml
+' style tweaks to make the diagram a little more readable
+skinparam {
+	Style strictuml
+	RoundCorner 5
+        Database {
+		' the default border no longer matches the normal colours (bug?), so fix this
+		BorderColor #A80036
+	}
+	Sequence {
+		' make activations yellow too
+		LifeLineBackgroundColor #FDFDCD
+
+		' make stereotypes less ugly
+		Stereotype {
+			Font {
+				Size 11
+				Style plain
+			}
+		}
+	}
+}
+
+actor User as user
+participant ":Main" as main
+participant ":MainMenu" as menu <<gui>>
+participant ":ProductEditor" as viewProduct <<gui>>
+participant "dao\n:ProductJdbcDAO" as dao <<dao>>
+participant "categoryModel\n:SimpleListModel" as model <<helpers>>
+participant "product\n:Product" as product <<domain>>
+database "H2\nDatabase" as db
+
+create dao
+main -> dao : «construct»
+
+
+create menu
+main -> menu : «construct(dao)»
+
+user -> menu++ : clicks 'View Products'
+
+create dialog
+menu -> dialog++ : « construct (dao)»
+
+@enduml
