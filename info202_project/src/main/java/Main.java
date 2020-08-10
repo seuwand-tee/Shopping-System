@@ -17,6 +17,7 @@ public class Main {
 	 * @param args the command line arguments
 	 */
 	public static void main(String[] args) {
+	final dao.ProductDAO productsList = new dao.ProductJdbcDAO();
 	domain.Product product;
 	domain.Product item;
 	domain.Product stock;
@@ -48,7 +49,7 @@ public class Main {
 		products.saveProduct(stock);
 		products.saveProduct(product);
 		
-		gui.MainMenu main = new gui.MainMenu();
+		gui.MainMenu main = new gui.MainMenu(productsList);
 		main.setLocationRelativeTo(null);
 		main.setVisible(true);
 	}

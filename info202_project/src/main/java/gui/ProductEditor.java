@@ -5,29 +5,36 @@
  */
 package gui;
 
+import dao.DAOException;
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.util.Collection;
 import javax.swing.JOptionPane;
+import net.sf.oval.ConstraintViolation;
+import net.sf.oval.Validator;
+import net.sf.oval.exception.ConstraintsViolatedException;
 
 /**
  *
  * @author teewa743
  */
 public class ProductEditor extends javax.swing.JDialog {
-final dao.ProductJdbcDAO productsList;
-helpers.SimpleListModel categoriesModel = new helpers.SimpleListModel();
+
+	final dao.ProductDAO productsList;
+	helpers.SimpleListModel categoriesModel = new helpers.SimpleListModel();
 
 	/**
 	 * Creates new form ProductEditor
 	 */
-	public ProductEditor(java.awt.Frame parent, boolean modal) {
+	public ProductEditor(java.awt.Frame parent, boolean modal, dao.ProductDAO productsList) {
 		super(parent, modal);
 		initComponents();
+		this.productsList = productsList;
 		categorycombobox.setEditable(true);
-		Collection<String> categories= productsList.getCategories();
+		Collection<String> categories = productsList.getCategories();
 		categoriesModel.updateItems(categories);
 		categorycombobox.setModel(categoriesModel);
-		
+
 	}
 
 	/**
@@ -184,90 +191,53 @@ helpers.SimpleListModel categoriesModel = new helpers.SimpleListModel();
    }// </editor-fold>//GEN-END:initComponents
 
    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-		try{
-                String id = txtId.getText();
-		String name = txtName.getText();
-		String description = txtDescription.getText();
-		String category = (String) categorycombobox.getSelectedItem();
-		String price = txtPrice.getText();
-		String quantity = txtQuantity.getText();
-		BigDecimal p = new BigDecimal(price);
-		BigDecimal q = new BigDecimal(quantity);
-		domain.Product product = new domain.Product();
-		product.setProductID(id);
-		product.setListPrice(p);
-		product.setProductName(name);
-		product.setCategory(category);
-		product.setDescription(description);
-		product.setQuantityInStock(q);
-                new Validator().assertValid(product);
-		productsList.saveProduct(product);
-		dispose();
-                } catch(NumberFormatException e){
-                   JOptionPane.showMessageDialog(this,
-                   "You have entered a price or quantity that is not a valid number.", 
-                    "Input Error", JOptionPane.ERROR_MESSAGE);
-                } catch (ConstraintsViolatedException ex) {
+		try {
+			String id = txtId.getText();
+			String name = txtName.getText();
+			String description = txtDescription.getText();
+			String category = (String) categorycombobox.getSelectedItem();
+			String price = txtPrice.getText();
+			String quantity = txtQuantity.getText();
+			BigDecimal p = new BigDecimal(price);
+			BigDecimal q = new BigDecimal(quantity);
+			domain.Product product = new domain.Product();
+			product.setProductID(id);
+			product.setListPrice(p);
+			product.setProductName(name);
+			product.setCategory(category);
+			product.setDescription(description);
+			product.setQuantityInStock(q);
+			new Validator().assertValid(product);
+			productsList.saveProduct(product);
+			dispose();
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(this,
+					  "You have entered a price or quantity that is not a valid number.",
+					  "Input Error", JOptionPane.ERROR_MESSAGE);
+		} catch (ConstraintsViolatedException ex) {
 
-                   // get the violated constraints from the exception
-                    ConstraintViolation[] violations = ex.getConstraintViolations();
+			// get the violated constraints from the exception
+			ConstraintViolation[] violations = ex.getConstraintViolations();
 
-                   // create a nice error message for the user
-                    String msg = "Please fix the following input problems:";
-                    for (ConstraintViolation cv : violations) {
-                       msg += "\n  - " + cv.getMessage();
-                    }
+			 //create a nice error message for the user
+			String msg = "Please fix the following input problems:";
+			for (ConstraintViolation cv : violations) {
+				msg += "\n  - " + cv.getMessage();
+			}
 
-                    // display the message to the user
-                    JOptionPane.showMessageDialog(this, msg, "Input Error", JOptionPane.ERROR_MESSAGE);
-                 }
+			// display the message to the user
+			JOptionPane.showMessageDialog(this, msg, "Input Error", JOptionPane.ERROR_MESSAGE);
+		}	catch(DAOException ex) {
+		JOptionPane.showMessageDialog(this, ex.getMessage(), "Data Access Error", JOptionPane.ERROR_MESSAGE);
+}
    }//GEN-LAST:event_saveButtonActionPerformed
 
    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
-      dispose();
+		dispose();
    }//GEN-LAST:event_cancelButtonActionPerformed
 
-	/**
-	 * @param args the command line arguments
-	 */
-	public static void main(String args[]) {
-		/* Set the Nimbus look and feel */
-		//<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-		/* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-		 */
-		try {
-			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-				if ("Nimbus".equals(info.getName())) {
-					javax.swing.UIManager.setLookAndFeel(info.getClassName());
-					break;
-				}
-			}
-		} catch (ClassNotFoundException ex) {
-			java.util.logging.Logger.getLogger(ProductEditor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (InstantiationException ex) {
-			java.util.logging.Logger.getLogger(ProductEditor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (IllegalAccessException ex) {
-			java.util.logging.Logger.getLogger(ProductEditor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-			java.util.logging.Logger.getLogger(ProductEditor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		}
-		//</editor-fold>
 
-		/* Create and display the dialog */
-		java.awt.EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				ProductEditor dialog = new ProductEditor(new javax.swing.JFrame(), true);
-				dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-					@Override
-					public void windowClosing(java.awt.event.WindowEvent e) {
-						System.exit(0);
-					}
-				});
-				dialog.setVisible(true);
-			}
-		});
-	}
+	
 
    // Variables declaration - do not modify//GEN-BEGIN:variables
    private javax.swing.JButton cancelButton;

@@ -14,21 +14,21 @@ import javax.swing.JOptionPane;
  */
 public class ViewProduct extends javax.swing.JDialog {
 
-	dao.ProductJdbcDAO productsdao = new dao.ProductJdbcDAO();
+	final dao.ProductDAO productsList;
 	helpers.SimpleListModel productsModel = new helpers.SimpleListModel();
 	helpers.SimpleListModel categoriesModel = new helpers.SimpleListModel();
 
 	/**
 	 * Creates new form ViewProduct
 	 */
-	public ViewProduct(java.awt.Frame parent, boolean modal) {
+	public ViewProduct(java.awt.Frame parent, boolean modal, dao.ProductDAO productsList) {
 		super(parent, modal);
 		initComponents();
-
-		Collection<domain.Product> products = productsdao.getProducts();
+		this.productsList = productsList;
+		Collection<domain.Product> products = productsList.getProducts();
 		productsModel.updateItems(products);
 		jList1.setModel(productsModel);
-		Collection<String> categories= productsdao.getCategories();
+		Collection<String> categories= productsList.getCategories();
 		categoriesModel.updateItems(categories);
 		filtercombobox.setModel(categoriesModel);
 	}
@@ -171,7 +171,7 @@ public class ViewProduct extends javax.swing.JDialog {
 
    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
 		String id = txtID.getText();
-		productsModel.updateItems(productsdao.searchByID(id));
+		productsModel.updateItems(productsList.searchByID(id));
 		//
    }//GEN-LAST:event_searchButtonActionPerformed
 
@@ -180,8 +180,8 @@ public class ViewProduct extends javax.swing.JDialog {
 			domain.Product deleteProduct = (domain.Product) jList1.getSelectedValue();
 			int result = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete " + deleteProduct + " ?", "Delete Confirmation", JOptionPane.YES_NO_OPTION);
 			if (result == JOptionPane.YES_OPTION) {
-				productsdao.deleteProduct(deleteProduct);
-				productsModel.updateItems(productsdao.getProducts());
+				productsList.deleteProduct(deleteProduct);
+				productsModel.updateItems(productsList.getProducts());
 				jList1.clearSelection();
 			}
 		}
@@ -191,52 +191,14 @@ public class ViewProduct extends javax.swing.JDialog {
 
    private void filtercomboboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtercomboboxActionPerformed
     String filter = (String) filtercombobox.getSelectedItem();
-	 productsModel.updateItems(productsdao.filterByCategory(filter));
+	 productsModel.updateItems(productsList.filterByCategory(filter));
 		
    }//GEN-LAST:event_filtercomboboxActionPerformed
 
 	/**
 	 * @param args the command line arguments
 	 */
-	public static void main(String args[]) {
-		/* Set the Nimbus look and feel */
-		//<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-		/* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-		 */
-		try {
-			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-				if ("Nimbus".equals(info.getName())) {
-					javax.swing.UIManager.setLookAndFeel(info.getClassName());
-					break;
-				}
-			}
-		} catch (ClassNotFoundException ex) {
-			java.util.logging.Logger.getLogger(ViewProduct.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (InstantiationException ex) {
-			java.util.logging.Logger.getLogger(ViewProduct.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (IllegalAccessException ex) {
-			java.util.logging.Logger.getLogger(ViewProduct.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-			java.util.logging.Logger.getLogger(ViewProduct.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		}
-		//</editor-fold>
-
-		/* Create and display the dialog */
-		java.awt.EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				ViewProduct dialog = new ViewProduct(new javax.swing.JFrame(), true);
-				dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-					@Override
-					public void windowClosing(java.awt.event.WindowEvent e) {
-						System.exit(0);
-					}
-				});
-				dialog.setVisible(true);
-			}
-		});
-	}
-
+	
    // Variables declaration - do not modify//GEN-BEGIN:variables
    private javax.swing.JButton closeButton;
    private javax.swing.JButton deleteButton;

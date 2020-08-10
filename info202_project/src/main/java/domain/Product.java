@@ -6,6 +6,11 @@
 package domain;
 
 import java.math.BigDecimal;
+import net.sf.oval.constraint.Length;
+import net.sf.oval.constraint.NotBlank;
+import net.sf.oval.constraint.NotNegative;
+import net.sf.oval.constraint.NotNull;
+
 
 /**
  *
