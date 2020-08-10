@@ -11,27 +11,34 @@ import net.sf.oval.constraint.NotBlank;
 import net.sf.oval.constraint.NotNegative;
 import net.sf.oval.constraint.NotNull;
 
-
 /**
  *
  * @author teewa743
  */
 public class Product {
+
+	@NotNull(message = "Product ID must be provided.")
+	@NotBlank(message = "Product ID must be provided.")
 	private String productID;
-        @NotNull(message = "Name must be provided.")
-        @NotBlank(message = "Name must be provided.")
-        @Length(min=2, message="Name must contain at least two characters.")
+	@NotNull(message = "Name must be provided.")
+	@NotBlank(message = "Name must be provided.")
+	@Length(min = 2, message = "Name must contain at least two characters.")
 	private String name;
+	@NotNull(message = "Description must be provided.")
+	@NotBlank(message = "Description must be provided.")
 	private String description;
+	@NotNull(message = "Description must be provided.")
+	@NotBlank(message = "Description must be provided.")
 	private String category;
-        @NotNull(message = "Price must be provided.")
-        @NotNegative(message = "Price must be zero or greater.")
+	@NotNull(message = "Price must be provided.")
+	@NotNegative(message = "Price must be zero or greater.")
 	private BigDecimal list_price;
+	@NotNull(message = "Stock Quantity must be provided.")
+	@NotNegative(message = "Stock Quantity must be zero or greater.")
 	private BigDecimal quantity_in_stock;
 
 	public Product() {
 	}
-	
 
 	public Product(String productID, String name, String description, String category, BigDecimal list_price, BigDecimal quantity_in_stock) {
 		this.productID = productID;
@@ -41,7 +48,6 @@ public class Product {
 		this.list_price = list_price;
 		this.quantity_in_stock = quantity_in_stock;
 	}
-	
 
 	public String getProductID() {
 		return productID;
@@ -96,5 +102,4 @@ public class Product {
 		return "Product ID= " + productID + ", name= " + name;
 	}
 
-	
 }
