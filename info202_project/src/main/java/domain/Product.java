@@ -27,8 +27,8 @@ public class Product {
 	@NotNull(message = "Description must be provided.")
 	@NotBlank(message = "Description must be provided.")
 	private String description;
-	@NotNull(message = "Description must be provided.")
-	@NotBlank(message = "Description must be provided.")
+	@NotNull(message = "Category must be provided.")
+	@NotBlank(message = "Category must be provided.")
 	private String category;
 	@NotNull(message = "Price must be provided.")
 	@NotNegative(message = "Price must be zero or greater.")
