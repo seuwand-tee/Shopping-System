@@ -1,5 +1,4 @@
 @startuml
-@startuml
 ' style tweaks to make the diagram a little more readable
 skinparam {
 	Style strictuml
@@ -23,24 +22,63 @@ skinparam {
 }
 
 actor User as user
-participant ":Main" as main
-participant ":MainMenu" as menu <<gui>>
-participant ":ProductEditor" as viewProduct <<gui>>
-participant "dao\n:ProductJdbcDAO" as dao <<dao>>
-participant "categoryModel\n:SimpleListModel" as model <<helpers>>
-participant "product\n:Product" as product <<domain>>
+participant "Main" as main
+participant "MainMenu" as menu <<gui>>
+participant "ViewProduct" as ViewProduct <<gui>>
+participant "productsList\n:ProductJdbcDAO" as dao <<Product?DAO>>
+participant "productsModel\n:SimpleListModel" as model <<helpers>>
+participant "categoriesModel\n:SimpleListModel" as categoriesmodel <<helpers>>
 database "H2\nDatabase" as db
 
+
 create dao
-main -> dao : Â«constructÂ»
+main -> dao : «construct»
 
 
 create menu
-main -> menu : Â«construct(dao)Â»
+main -> menu : «construct(dao)»
 
 user -> menu++ : clicks 'View Products'
 
-create dialog
-menu -> dialog++ : Â«â€Šconstructâ€Š(dao)Â»
+create ViewProduct
+menu -> ViewProduct++ : «?construct?(dao)»
 
+
+create model
+ViewProduct -> model : <<construct>>
+create categoriesmodel
+ViewProduct -> categoriesmodel : <<construct>>
+ViewProduct--
+
+
+'ViewProduct++
+ViewProduct -> dao++ : getProducts()
+dao -> db++ : Select * from Product
+return ResultSet
+return products
+ViewProduct -> model++ : updateItems(products)
+model--
+ViewProduct -> ViewProduct :jList1.setModel(productsModel)
+ViewProduct -> dao++ : getCategories()
+dao -> db++ : select distinct category from Product
+return ResultSet
+return categories
+ViewProduct -> categoriesmodel++ : updateItems(categories)
+categoriesmodel--
+ViewProduct -> ViewProduct :filtercombobox.setModel(categoriesModel)
+ViewProduct --> menu
+
+menu -> ViewProduct++ : setVisible(true)
+
+user -> ViewProduct++: Select one category from combobox
+ViewProduct--
+
+ViewProduct -> ViewProduct : filter = filtercombobox.getSelectedItem()
+ViewProduct -> dao++ : filterByCategory(filter)
+dao -> db++ : select * from Product where category = (...)
+return ResultSet
+return product
+ViewProduct -> model++ : updateItems(product)
+model--
+ViewProduct--
 @enduml

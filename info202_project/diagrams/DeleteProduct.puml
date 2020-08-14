@@ -66,17 +66,17 @@ return categories
 ViewProduct -> categoriesmodel++ : updateItems(categories)
 categoriesmodel--
 ViewProduct -> ViewProduct :filtercombobox.setModel(categoriesModel)
-return
+ViewProduct --> menu
 
 menu -> ViewProduct++ : setVisible(true)
 user -> ViewProduct++ : clicks 'Delete'
 
 Group If a product is selected
 user -> ViewProduct++ : Selects a product
-ViewProduct -> ViewProduct : jList1.getSelectedValue()
-ViewProduct -> ViewProduct : JOptionPane.showConfirmDialog()
+ViewProduct -> ViewProduct : deleteProduct = jList1.getSelectedValue()
+ViewProduct -> ViewProduct : result = JOptionPane.showConfirmDialog()
 
-Group If yes is selected
+Group If result is yes
 ViewProduct -> dao++ : deleteProduct(deleteProduct)
 dao -> db++ : delete from Product where productID (...)
 db--

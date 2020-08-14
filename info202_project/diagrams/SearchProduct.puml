@@ -66,7 +66,7 @@ return categories
 ViewProduct -> categoriesmodel++ : updateItems(categories)
 categoriesmodel--
 ViewProduct -> ViewProduct :filtercombobox.setModel(categoriesModel)
-return
+ViewProduct --> menu
 
 menu -> ViewProduct++ : setVisible(true)
 
@@ -75,7 +75,7 @@ ViewProduct--
  
 user -> ViewProduct++ : clicks 'Search'
 ViewProduct -> ViewProduct : id = txtID.getText()
-ViewProduct -> dao++ : searchbyID(id)
+ViewProduct -> dao++ : searchByID(id)
 dao -> db++ : select * from Product where productID = (...)
 return ResultSet
 return product
