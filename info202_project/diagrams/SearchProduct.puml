@@ -48,10 +48,8 @@ create model
 ViewProduct -> model : <<construct>>
 create categoriesmodel
 ViewProduct -> categoriesmodel : <<construct>>
-ViewProduct--
 
 
-'ViewProduct++
 ViewProduct -> dao++ : getProducts()
 dao -> db++ : Select * from Product
 return ResultSet
@@ -67,7 +65,7 @@ ViewProduct -> categoriesmodel++ : updateItems(categories)
 categoriesmodel--
 ViewProduct -> ViewProduct :filtercombobox.setModel(categoriesModel)
 ViewProduct --> menu
-
+ViewProduct--
 menu -> ViewProduct++ : setVisible(true)
 
 user -> ViewProduct++ : Enter productID into input components
