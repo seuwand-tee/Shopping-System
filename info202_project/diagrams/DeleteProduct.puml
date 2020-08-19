@@ -25,23 +25,23 @@ actor User as user
 participant "Main" as main
 participant "MainMenu" as menu <<gui>>
 participant "ViewProduct" as ViewProduct <<gui>>
-participant "productsList\n:ProductJdbcDAO" as dao <<Product?DAO>>
+participant "productsList\n:ProductJdbcDAO" as dao <<ProductDAO>>
 participant "productsModel\n:SimpleListModel" as model <<helpers>>
 participant "categoriesModel\n:SimpleListModel" as categoriesmodel <<helpers>>
 database "H2\nDatabase" as db
 
 
 create dao
-main -> dao : «construct»
+main -> dao : ï¿½constructï¿½
 
 
 create menu
-main -> menu : «construct(dao)»
+main -> menu : ï¿½construct(dao)ï¿½
 
 user -> menu++ : clicks 'View Products'
 
 create ViewProduct
-menu -> ViewProduct++ : «?construct?(dao)»
+menu -> ViewProduct++ : ï¿½?construct?(dao)ï¿½
 
 
 create model
@@ -130,16 +130,16 @@ database "H2\nDatabase" as db
 
 
 create dao
-main -> dao : «construct»
+main -> dao : ï¿½constructï¿½
 
 
 create menu
-main -> menu : «construct(dao)»
+main -> menu : ï¿½construct(dao)ï¿½
 
 user -> menu++ : clicks 'View Products'
 
 create ViewProduct
-menu -> ViewProduct++ : «?construct?(dao)»
+menu -> ViewProduct++ : ï¿½?construct?(dao)ï¿½
 
 
 create model
