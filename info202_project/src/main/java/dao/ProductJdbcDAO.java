@@ -73,7 +73,7 @@ public class ProductJdbcDAO implements ProductDAO {
 				BigDecimal quantityInStock = rs.getBigDecimal("quantityInStock");
 
 				// use the data to create a student object
-				Product p = new Product(productID, name, description, category, listPrice, quantityInStock);
+				Product p = new Product(productID, name, description, Productcategory, listPrice, quantityInStock);
 
 				// and put it in the collection
 				product.add(p);

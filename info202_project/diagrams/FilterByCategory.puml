@@ -41,7 +41,7 @@ main -> menu : «construct(dao)»
 user -> menu++ : clicks 'View Products'
 
 create ViewProduct
-menu -> ViewProduct++ : «?construct?(dao)»
+menu -> ViewProduct++ : «construct(dao)»
 
 
 create model

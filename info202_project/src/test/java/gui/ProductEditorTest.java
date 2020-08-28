@@ -5,7 +5,7 @@
  */
 package gui;
 
-import java.util.ArrayList;
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.HashSet;
 import org.assertj.swing.core.BasicRobot;
@@ -100,7 +100,10 @@ public class ProductEditorTest {
 		// test that the student's details were properly saved
 		assertThat("Ensure the ID was saved", savedProduct.getProductID(), is("1234"));
 		assertThat("Ensure the name was saved", savedProduct.getProductName(), is("Stuff"));
-//		assertThat("Ensure the major was saved", savedProduct.getMajor(), is("Knitting"));
+		assertThat("Ensure the description was saved", savedProduct.getDescription(), is("Item"));
+                assertThat("Ensure the category was saved", savedProduct.getCategory(), is("Knitting"));
+                assertThat("Ensure the price was saved", savedProduct.getListPrice(), is(new BigDecimal(111)));
+                assertThat("Ensure the quantity in stock was saved", savedProduct.getQuantityInStock(), is(new BigDecimal(222)));
     }
 
 }
