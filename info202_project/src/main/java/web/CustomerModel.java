@@ -11,14 +11,15 @@ import org.jooby.Jooby;
  *
  * @author User
  */
-public class ProductModule extends Jooby{
+public class CustomerModel extends Jooby{
     final dao.ProductDAO productsList;
-    public ProductModule(dao.ProductDAO productsList){
-    this.productsList = new dao.ProductJdbcDAO(uri);
-    get("/api/products", () -> productsList.getProducts());
-    get("/api/products/:id", (req) -> {
-    String id = req.param("id").value();
+    public CustomerModule(dao.ProductDAO dao){
+    productsList = new dao.ProductJdbcDAO(uri)
+    get("/api/customer", () -> productsList.getProducts());
+    get("/api/customer/:customer_id", (req) -> {
+    String id = req.param("customer_id").value();
     return productsList.searchByID(id);
 });
     }
+}
 }

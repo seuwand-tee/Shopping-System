@@ -12,6 +12,9 @@ public class Customer {
 	private String password;
 	private String email_address;
 	private String shipping_address;
+        
+        public Customer(){
+        }
 
 	public Customer(Integer customer_id, String username, String firstname, String surname, String password, String email_address, String shipping_address) {
 		this.customer_id = customer_id;
@@ -22,7 +25,6 @@ public class Customer {
 		this.email_address = email_address;
 		this.shipping_address = shipping_address;
 	}
-	
 
 	public Integer getCustomer_id() {
 		return customer_id;

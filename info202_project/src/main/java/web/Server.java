@@ -7,13 +7,14 @@ package web;
 
 import java.util.concurrent.CompletableFuture;
 import org.jooby.Jooby;
+import org.jooby.json.Gzon;
 
 /**
  *
  * @author User
  */
 public class Server extends Jooby{
-    dao.ProductDAO productDao = new dao.ProductJdbcDAO(); 
+    final dao.ProductDAO productDao = new dao.ProductJdbcDAO(); 
    
     public static void main(String[] args) throws Exception {
    System.out.println("\nStarting Server.");
@@ -34,5 +35,7 @@ public class Server extends Jooby{
 }
     public Server(){
     port(8080);
+    use(new web.ProductModule(productDao));
+    use(new Gzon());
     }
 }
