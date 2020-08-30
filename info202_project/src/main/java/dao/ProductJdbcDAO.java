@@ -68,12 +68,12 @@ public class ProductJdbcDAO implements ProductDAO {
 				String productID = rs.getString("productID");
 				String name = rs.getString("name");
 				String description = rs.getString("description");
-				String Productcategory = rs.getString("category");
+				String productcategory = rs.getString("category");
 				BigDecimal listPrice = rs.getBigDecimal("listPrice");
 				BigDecimal quantityInStock = rs.getBigDecimal("quantityInStock");
 
 				// use the data to create a student object
-				Product p = new Product(productID, name, description, Productcategory, listPrice, quantityInStock);
+				Product p = new Product(productID, name, description, productcategory, listPrice, quantityInStock);
 
 				// and put it in the collection
 				product.add(p);
