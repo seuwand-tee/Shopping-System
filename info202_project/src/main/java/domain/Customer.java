@@ -1,5 +1,7 @@
 package domain;
 
+import java.math.BigDecimal;
+
 /**
  *
  * @author teewa743
@@ -25,6 +27,10 @@ public class Customer {
 		this.email_address = email_address;
 		this.shipping_address = shipping_address;
 	}
+
+    public Customer(String productID, String name, String description, String category, BigDecimal listPrice, BigDecimal quantityInStock) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 	public Integer getCustomer_id() {
 		return customer_id;
