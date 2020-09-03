@@ -50,7 +50,7 @@ public class CustomerJdbcDAO implements CustomerDAO {
                 // get the data out of the query
 	
                 Integer customer_id = rs.getInt("customer_id");
-                String username = rs.getString("username");
+                //String username = rs.getString("username");
                 String firstname = rs.getString("firstname");
                 String surname = rs.getString("surname");
                 String password = rs.getString("password");
@@ -64,7 +64,7 @@ public class CustomerJdbcDAO implements CustomerDAO {
                 customer.add(c);
             }
 
-            return customer;
+            return (Customer) customer;
 
         } catch (SQLException ex) {  // we are forced to catch SQLException
             // don't let the SQLException leak from our DAO encapsulation
