@@ -32,123 +32,122 @@ import org.mockito.stubbing.Answer;
  */
 public class ViewProductTest {
 
-    dao.ProductDAO product = new dao.ProductJdbcDAO("jdbc:h2:mem:tests;INIT=runscript from 'src/main/java/dao/schema.sql'");
-    private DialogFixture fixture;
-    private Robot robot;
+	dao.ProductDAO product = new dao.ProductJdbcDAO("jdbc:h2:mem:tests;INIT=runscript from 'src/main/java/dao/schema.sql'");
+	private DialogFixture fixture;
+	private Robot robot;
+	private domain.Product p1;
+	private domain.Product p2;
 
-    public ViewProductTest() {
-    }
+	public ViewProductTest() {
+	}
 
-    @BeforeEach
-    public void setUp() {
-        robot = BasicRobot.robotWithNewAwtHierarchy();
+	@BeforeEach
+	public void setUp() {
+		robot = BasicRobot.robotWithNewAwtHierarchy();
 
-        // Slow down the robot a little bit - default is 30 (milliseconds).
-        // Do NOT make it less than 10 or you will have thread-race problems.
-        robot.settings().delayBetweenEvents(75);
+		// Slow down the robot a little bit - default is 30 (milliseconds).
+		// Do NOT make it less than 10 or you will have thread-race problems.
+		robot.settings().delayBetweenEvents(75);
 
-        // create a products collection for stubbing purposes
-        Collection<domain.Product> products = new HashSet<>();
-        domain.Product p1 = new domain.Product("12345", "Product1", "Stuff1", "Item1", (new BigDecimal(111)), (new BigDecimal(222)));
-        domain.Product p2 = new domain.Product("67890", "Product2", "Stuff2", "Item2", (new BigDecimal(333)), (new BigDecimal(444)));
-        products.add(p1);
-        products.add(p2);
+		// create a products collection for stubbing purposes
+		Collection<domain.Product> products = new HashSet<>();
+		p1 = new domain.Product("12345", "Product1", "Stuff1", "Item1", (new BigDecimal(111)), (new BigDecimal(222)));
+		p2 = new domain.Product("67890", "Product2", "Stuff2", "Item2", (new BigDecimal(333)), (new BigDecimal(444)));
+		products.add(p1);
+		products.add(p2);
 
-        // create a mock for the DAO
-        product = mock(dao.ProductDAO.class);
+		// create a mock for the DAO
+		product = mock(dao.ProductDAO.class);
 
-        // stub the getProducts method
-        when(product.getProducts()).thenReturn(products);
-        // stub the removeProduct method
-        Mockito.doAnswer(new Answer<Void>() {
-            @Override
-            public Void answer(InvocationOnMock invocation) throws Throwable {
-                // remove the product from the collection that getProducts() uses
-                products.remove(p1);
-                return null;
-            }
-        }).when(product).deleteProduct(p1);
-    }
+		// stub the getProducts method
+		when(product.getProducts()).thenReturn(products);
+		// stub the removeProduct method
+		Mockito.doAnswer(new Answer<Void>() {
+			@Override
+			public Void answer(InvocationOnMock invocation) throws Throwable {
+				// remove the product from the collection that getProducts() uses
+				products.remove(p1);
+				return null;
+			}
+		}).when(product).deleteProduct(p1);
+	}
 
-    @AfterEach
-    public void tearDown() {
-        // clean up fixture so that it is ready for the next test
-        fixture.cleanUp();
-    }
+	@AfterEach
+	public void tearDown() {
+		// clean up fixture so that it is ready for the next test
+		fixture.cleanUp();
+	}
 
-    @Test
-    public void testViewAllProduct() {
-        // create the dialog passing in the mocked DAO
-        gui.ViewProduct dialog = new gui.ViewProduct(null, true, product);
+	@Test
+	public void testViewAllProduct() {
+		// create the dialog passing in the mocked DAO
+		gui.ViewProduct dialog = new gui.ViewProduct(null, true, product);
 
-        // use AssertJ to control the dialog
-        fixture = new DialogFixture(robot, dialog);
+		// use AssertJ to control the dialog
+		fixture = new DialogFixture(robot, dialog);
 
-        // show the dialog on the screen, and ensure it is visible
-        fixture.show().requireVisible();
+		// show the dialog on the screen, and ensure it is visible
+		fixture.show().requireVisible();
 
-        // click the dialog to ensure the robot is focused in the correct window
-        // (can get confused by multi-monitor and virtual desktop setups)
-        fixture.click();
+		// click the dialog to ensure the robot is focused in the correct window
+		// (can get confused by multi-monitor and virtual desktop setups)
+		fixture.click();
 
-        // get the model
-        helpers.SimpleListModel model = (helpers.SimpleListModel) fixture.list("lstProducts").target().getModel();
+		// get the model
+		helpers.SimpleListModel model = (helpers.SimpleListModel) fixture.list("products").target().getModel();
 
-        // create a Mockito argument captor to use to retrieve the passed student from the mocked DAO
-        ArgumentCaptor<domain.Product> argument = ArgumentCaptor.forClass(domain.Product.class);
+		// check the contents
+		assertTrue("list contains the expected product", model.contains(p1));
+		assertTrue("list contains the expected product", model.contains(p2));
+		assertEquals("list contains the correct number of products", 2, model.getSize());
+	}
 
-        // verify that the DAO.save method was called, and capture the passed student
-        verify(product).saveProduct(argument.capture());
+	@Test
+	public void testDeleteProduct() {
+		// create the dialog passing in the mocked DAO
+		gui.ViewProduct dialog = new gui.ViewProduct(null, true, product);
 
-        // retrieve the passed student from the captor
-        domain.Product savedProduct = argument.getValue();
+		// use AssertJ to control the dialog
+		fixture = new DialogFixture(robot, dialog);
 
-        // check the contents
-        assertTrue("list contains the expected product", model.contains(product));
-        assertEquals("list contains the correct number of products", 2, model.getSize());
-    }
+		// show the dialog on the screen, and ensure it is visible
+		fixture.show().requireVisible();
 
-    @Test
-    public void testDeleteProduct() {
-        // create the dialog passing in the mocked DAO
-        gui.ViewProduct dialog = new gui.ViewProduct(null, true, product);
+		// click the dialog to ensure the robot is focused in the correct window
+		// (can get confused by multi-monitor and virtual desktop setups)
+		fixture.click();
 
-        // use AssertJ to control the dialog
-        fixture = new DialogFixture(robot, dialog);
+		//select p1
+		// click the delete button
+		fixture.button("deleteButton").click();
 
-        // show the dialog on the screen, and ensure it is visible
-        fixture.show().requireVisible();
+		// create a Mockito argument captor to use to retrieve the passed student from the mocked DAO
+		ArgumentCaptor<domain.Product> argument = ArgumentCaptor.forClass(domain.Product.class);
 
-        // click the dialog to ensure the robot is focused in the correct window
-        // (can get confused by multi-monitor and virtual desktop setups)
-        fixture.click();
+		// verify that the DAO.save method was called, and capture the passed student
+		verify(product).deleteProduct(argument.capture());
 
-        //select p1
-        
-        // click the delete button
-	fixture.button("deleteButton").click();
+		// retrieve the passed student from the captor
+		domain.Product deleteProduct = argument.getValue();
+		
+		helpers.SimpleListModel model = (helpers.SimpleListModel) fixture.list("products").target().getModel();
 
-	// create a Mockito argument captor to use to retrieve the passed student from the mocked DAO
-        ArgumentCaptor<domain.Product> argument = ArgumentCaptor.forClass(domain.Product.class);
+		// check the contents
+		assertTrue("list contains the expected product", model.contains(p1));
+		assertTrue("list contains the expected product", model.contains(p2));
+		assertEquals("list contains the correct number of products", 2, model.getSize());
 
-        // verify that the DAO.save method was called, and capture the passed student
-        verify(product).deleteProduct(argument.capture());
+		// test that the product's details were properly deleted
+		assertThat("Ensure the ID was del", deleteProduct.getProductID(), isnot("1234"));
+		assertThat("Ensure the name was saved", deleteProduct.getProductName(), is("Stuff"));
+		assertThat("Ensure the description was saved", deleteProduct.getDescription(), is("Item"));
+		assertThat("Ensure the category was saved", deleteProduct.getCategory(), is("Knitting"));
+		assertThat("Ensure the price was saved", deleteProduct.getListPrice(), is(new BigDecimal(111)));
+		assertThat("Ensure the quantity in stock was saved", deleteProduct.getQuantityInStock(), is(new BigDecimal(222)));
+		// check the contents
+		// get the model
 
-        // retrieve the passed student from the captor
-        domain.Product deleteProduct = argument.getValue();
-        
-	// test that the product's details were properly deleted
-	assertThat("Ensure the ID was del", deleteProduct.getProductID(), isnot("1234"));
-	assertThat("Ensure the name was saved", deleteProduct.getProductName(), is("Stuff"));
-	assertThat("Ensure the description was saved", deleteProduct.getDescription(), is("Item"));
-        assertThat("Ensure the category was saved", deleteProduct.getCategory(), is("Knitting"));
-        assertThat("Ensure the price was saved", deleteProduct.getListPrice(), is(new BigDecimal(111)));
-        assertThat("Ensure the quantity in stock was saved", deleteProduct.getQuantityInStock(), is(new BigDecimal(222)));
-        // check the contents
-        // get the model
-        helpers.SimpleListModel model = (helpers.SimpleListModel) fixture.list("lstProducts").target().getModel();
-
-        assertTrue("list contains the expected product", model.contains(product));
-        assertEquals("list contains the correct number of products", 1, model.getSize());
-    }
+		assertTrue("list contains the expected product", model.contains(product));
+		assertEquals("list contains the correct number of products", 1, model.getSize());
+	}
 }
