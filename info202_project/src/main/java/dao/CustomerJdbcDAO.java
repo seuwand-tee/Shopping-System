@@ -6,13 +6,11 @@
 package dao;
 
 import domain.Customer;
-import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collection;
+
 
 /**
  *
@@ -32,20 +30,19 @@ public class CustomerJdbcDAO implements CustomerDAO {
 
     @Override
     public Customer getCustomer(String username) {
-        String sql = "select * from Customer order by CustomerID";
+        String sql = "select * from Customer where username = ?";
 
         try (
               // get a connection to the database
                  Connection dbCon = DbConnection.getConnection(uri); // create the statement
                   PreparedStatement stmt = dbCon.prepareStatement(sql);) {
-            // execute the query
+stmt.setString(1, username);            
+// execute the query
             ResultSet rs = stmt.executeQuery();
 
-            // Using a List to preserve the order in which the data was returned from the query.
-            Collection<Customer> customer = new ArrayList<>();
 
             // iterate through the query results
-            while (rs.next()) {
+            if (rs.next()) {
 
                 // get the data out of the query
 	
@@ -61,10 +58,10 @@ public class CustomerJdbcDAO implements CustomerDAO {
                 Customer c = new Customer(customer_id, username, firstname, surname, password, email_address, shipping_address);
 
                 // and put it in the collection
-                customer.add(c);
-            }
-
-            return (Customer) customer;
+                return c;
+            }else{
+					return null;
+				}
 
         } catch (SQLException ex) {  // we are forced to catch SQLException
             // don't let the SQLException leak from our DAO encapsulation
@@ -95,7 +92,24 @@ public class CustomerJdbcDAO implements CustomerDAO {
 
     @Override
     public Boolean validateCredentials(String username, String password) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "select * from Customer where username = ? and password = ?";
+
+        try (
+              // get a connection to the database
+                 Connection dbCon = DbConnection.getConnection(uri); // create the statement
+                  PreparedStatement stmt = dbCon.prepareStatement(sql);) {
+					stmt.setString(1, username);
+					stmt.setString(2, password);
+// execute the query
+            ResultSet rs = stmt.executeQuery();
+
+
+            return (rs.next());
+
+        } catch (SQLException ex) {  // we are forced to catch SQLException
+            // don't let the SQLException leak from our DAO encapsulation
+            throw new DAOException(ex.getMessage(), ex);
+        }
     }
 
 }
