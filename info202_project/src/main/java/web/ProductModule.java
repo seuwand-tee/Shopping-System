@@ -11,14 +11,16 @@ import org.jooby.Jooby;
  *
  * @author User
  */
-public class ProductModule extends Jooby{
-    final dao.ProductDAO productsList;
-    public ProductModule(dao.ProductDAO productsList){
-    this.productsList = new dao.ProductJdbcDAO(uri);
-    get("/api/products", () -> productsList.getProducts());
-    get("/api/products/:id", (req) -> {
-    String id = req.param("id").value();
-    return productsList.searchByID(id);
-});
-    }
+public class ProductModule extends Jooby {
+
+	final dao.ProductDAO productsList;
+
+	public ProductModule(dao.ProductDAO productsList) {
+		this.productsList = new dao.ProductJdbcDAO();
+		get("/api/products", () -> productsList.getProducts());
+		get("/api/products/:id", (req) -> {
+			String id = req.param("id").value();
+			return productsList.searchByID(id);
+		});
+	}
 }

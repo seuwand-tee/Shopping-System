@@ -10,6 +10,8 @@ import java.util.Collection;
 import java.util.HashSet;
 import org.assertj.swing.core.BasicRobot;
 import org.assertj.swing.core.Robot;
+import static org.assertj.swing.core.matcher.DialogMatcher.withTitle;
+import static org.assertj.swing.core.matcher.JButtonMatcher.withText;
 import org.assertj.swing.fixture.DialogFixture;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
@@ -94,7 +96,7 @@ public class ViewProductTest {
 		fixture.click();
 
 		// get the model
-		helpers.SimpleListModel model = (helpers.SimpleListModel) fixture.list("products").target().getModel();
+		helpers.SimpleListModel model = (helpers.SimpleListModel) fixture.list().target().getModel();
 
 		// check the contents
 		assertTrue("list contains the expected product", model.contains(p1));
@@ -116,38 +118,25 @@ public class ViewProductTest {
 		// click the dialog to ensure the robot is focused in the correct window
 		// (can get confused by multi-monitor and virtual desktop setups)
 		fixture.click();
-
-		//select p1
-		// click the delete button
-		fixture.button("deleteButton").click();
-
-		// create a Mockito argument captor to use to retrieve the passed student from the mocked DAO
-		ArgumentCaptor<domain.Product> argument = ArgumentCaptor.forClass(domain.Product.class);
-
-		// verify that the DAO.save method was called, and capture the passed student
-		verify(product).deleteProduct(argument.capture());
-
-		// retrieve the passed student from the captor
-		domain.Product deleteProduct = argument.getValue();
-		
-		helpers.SimpleListModel model = (helpers.SimpleListModel) fixture.list("products").target().getModel();
-
+		helpers.SimpleListModel model = (helpers.SimpleListModel) fixture.list().target().getModel();
 		// check the contents
 		assertTrue("list contains the expected product", model.contains(p1));
 		assertTrue("list contains the expected product", model.contains(p2));
 		assertEquals("list contains the correct number of products", 2, model.getSize());
+		//select p1
+		fixture.list().selectItem(p1.toString());
+		// click the delete button
+		fixture.button("deleteButton").click();
+		DialogFixture focus = fixture.dialog(withTitle("Delete Confirmation").andShowing()).requireVisible();
+		focus.button(withText("Yes")).click();
 
-		// test that the product's details were properly deleted
-		assertThat("Ensure the ID was del", deleteProduct.getProductID(), isnot("1234"));
-		assertThat("Ensure the name was saved", deleteProduct.getProductName(), is("Stuff"));
-		assertThat("Ensure the description was saved", deleteProduct.getDescription(), is("Item"));
-		assertThat("Ensure the category was saved", deleteProduct.getCategory(), is("Knitting"));
-		assertThat("Ensure the price was saved", deleteProduct.getListPrice(), is(new BigDecimal(111)));
-		assertThat("Ensure the quantity in stock was saved", deleteProduct.getQuantityInStock(), is(new BigDecimal(222)));
+		// verify that the DAO.save method was called, and capture the passed student
+		verify(product).deleteProduct(p1);
+
 		// check the contents
-		// get the model
-
-		assertTrue("list contains the expected product", model.contains(product));
+		assertTrue("list does not contains the expected product", !model.contains(p1));
+		assertTrue("list contains the expected product", model.contains(p2));
 		assertEquals("list contains the correct number of products", 1, model.getSize());
+
 	}
 }
