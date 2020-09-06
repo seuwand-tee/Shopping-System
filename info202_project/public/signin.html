@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Sign In</title>
+        <meta charset="windows-1252">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h1>Sign In</h1>
+        <h2>Please sign-in to continue</h2>
+        <form action="Customer" method="GET">
+            <fieldset>
+                <legend>Account Details</legend>
+                <label for="username">Username:</label>
+                <input id="username" name="username" type="text">
+                <label for="password">Password:</label>
+                <input id="password" type="password" name="password">
+                <button type="submit">Sign In</button>
+            </fieldset>
+            <p>If you don't have an account, please </p>
+            <a href="http://localhost:8080/account.html">create one</a>
+    </body>
+</html>
