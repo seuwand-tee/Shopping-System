@@ -4,30 +4,27 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html>
+<html ng-app="ShoppingApp">
     <head>
         <title>Create An Account</title>
         <meta charset="windows-1252">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="js/angular.js"></script>
+        <script src="js/angular-resource.js"></script>
+        <script src="js/ngStorage.js"></script>
+        <script src="js/shopping.js"></script>
     </head>
     <body>
         <h1>Create An Account</h1>
-        <form action="Customer" method="POST">
+        <form ng-controller="CustomerController as custCtrl", ng-submit="custCtrl.registerCustomer(customer)">
             <fieldset>
                 <legend>Account Details</legend>
-                <label for="username">Username:</label>
-                <input id="username" name="username" type="text">
-                <label for="firstname">First Name:</label>
-                <input id="firstname" name="firstname" type="text">
-                <label for="surname">Surname:</label>
-                <input id="surname" name="surname" type="text">
-                <label for="email_address">Email:</label>
-                <input id="email_address" name="email_address" type="text">
-                <label for="shipping_address">Address:</label>
-                <textarea id="shipping_address" name="shipping_address" rows="4" cols="20">
-                </textarea>
-                <label for="password">Password:</label>
-                <input id="password" type="password" name="password">
+                <input type="text" ng-model="customer.username" required>
+                <input type="text" ng-model="customer.firstName" required>
+                <input type="text" ng-model="customer.surname" required>
+                <input type="email" ng-model="customer.email_address" required>
+                <input type="text" ng-model="customer.shipping_address" required>
+                <input type="password" ng-model="customer.shipping_address" required>
                 <button type="submit">Create Account</button>
             </fieldset>
         </form>

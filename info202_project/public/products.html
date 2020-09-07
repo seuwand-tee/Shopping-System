@@ -4,48 +4,42 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html>
-	<head>
-		<title>View Products</title>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	</head>
-	<body>
-      <h1>Products</h1>
-		<button>All</button>
-		<button>Item1</button>
-		<button>All</button>
-		<button>All</button>
-		<table border="1">
-			<thead>
-				<tr>
-					<th>Name</th>
-					<th>Description</th>
-					<th>Price</th>
-					<th>Available</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>item</td>
-					<td>description</td>
-					<td>price</td>
-					<td>1233</td>
-					<td><button>All</button></td>
-				</tr>
-				<tr>
-					<td>item</td>
-					<td>description</td>
-					<td>price</td>
-					<td>345</td>
-					<td><button>All</button></td>
-				</tr>
-			</tbody>
-		</table>
+<html ng-app="ShoppingApp">
+    <head>
+        <title>View Products</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="js/angular.js"></script>
+        <script src="js/angular-resource.js"></script>
+        <script src="js/ngStorage.js"></script>
+        <script src="js/shopping.js"></script>
+    </head>
+    <body>
+        <h1>Products</h1>
+        <button ng-repeat="cat in prodCtrl.categories", ng-click="prodCtrl.selectCategory(cat)">{{cat}}</button>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Available</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <body ng-controller="ProductController as prodCtrl">
+            <tr data-ng-repeat="product in prodCtrl.products">
+                <td>{{product.name}}</td>
+                <td>{{product.description}}</td>
+                <td>{{product.price}}</td>
+                <td>{{product.quantityInStock}}</td>
+                <td><button>All</button></td>
+            </tr>
+        </tbody>
+    </table>
 
-		
-		
-		
-	</body>
+
+
+
+</body>
 </html>

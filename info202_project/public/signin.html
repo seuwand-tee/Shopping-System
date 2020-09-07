@@ -4,22 +4,25 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html>
+<html ng-app="ShoppingApp">
     <head>
         <title>Sign In</title>
         <meta charset="windows-1252">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="js/angular.js"></script>
+        <script src="js/angular-resource.js"></script>
+        <script src="js/ngStorage.js"></script>
+        <script src="js/shopping.js"></script>
     </head>
-    <body>
+    <body ng-controller="CustomerController as custCtrl">
         <h1>Sign In</h1>
         <h2>Please sign-in to continue</h2>
-        <form action="Customer" method="GET">
+        <p>{{custCtrl.signInMessage}}</p>
+        <form ng-submit="custCtrl.signIn(username, password)">
             <fieldset>
                 <legend>Account Details</legend>
-                <label for="username">Username:</label>
-                <input id="username" name="username" type="text">
-                <label for="password">Password:</label>
-                <input id="password" type="password" name="password">
+                <input type="username" ng-model="username" required>
+                <input type="password" ng-model="password" required>
                 <button type="submit">Sign In</button>
             </fieldset>
             <p>If you don't have an account, please </p>
