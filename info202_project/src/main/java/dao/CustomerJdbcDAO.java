@@ -11,7 +11,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-
 /**
  *
  * @author User
@@ -33,19 +32,17 @@ public class CustomerJdbcDAO implements CustomerDAO {
         String sql = "select * from Customer where username = ?";
 
         try (
-              // get a connection to the database
+                // get a connection to the database
                  Connection dbCon = DbConnection.getConnection(uri); // create the statement
                   PreparedStatement stmt = dbCon.prepareStatement(sql);) {
-stmt.setString(1, username);            
+            stmt.setString(1, username);
 // execute the query
             ResultSet rs = stmt.executeQuery();
-
 
             // iterate through the query results
             if (rs.next()) {
 
                 // get the data out of the query
-	
                 Integer customer_id = rs.getInt("customer_id");
                 //String username = rs.getString("username");
                 String firstname = rs.getString("firstname");
@@ -59,9 +56,9 @@ stmt.setString(1, username);
 
                 // and put it in the collection
                 return c;
-            }else{
-					return null;
-				}
+            } else {
+                return null;
+            }
 
         } catch (SQLException ex) {  // we are forced to catch SQLException
             // don't let the SQLException leak from our DAO encapsulation
@@ -73,7 +70,7 @@ stmt.setString(1, username);
     public void saveCustomer(Customer customer) {
         String sql = "insert into Customer (customer_id, username, firstname, surname, password, email_address, shipping_address) values (?,?,?,?,?,?,?)";
         try (
-            Connection dbCon = DbConnection.getConnection(uri);  PreparedStatement stmt = dbCon.prepareStatement(sql);) {
+                 Connection dbCon = DbConnection.getConnection(uri);  PreparedStatement stmt = dbCon.prepareStatement(sql);) {
             stmt.setInt(1, customer.getCustomer_id());
             stmt.setString(2, customer.getUsername());
             stmt.setString(3, customer.getFirstname());
@@ -95,14 +92,13 @@ stmt.setString(1, username);
         String sql = "select * from Customer where username = ? and password = ?";
 
         try (
-              // get a connection to the database
+                // get a connection to the database
                  Connection dbCon = DbConnection.getConnection(uri); // create the statement
                   PreparedStatement stmt = dbCon.prepareStatement(sql);) {
-					stmt.setString(1, username);
-					stmt.setString(2, password);
+            stmt.setString(1, username);
+            stmt.setString(2, password);
 // execute the query
             ResultSet rs = stmt.executeQuery();
-
 
             return (rs.next());
 
