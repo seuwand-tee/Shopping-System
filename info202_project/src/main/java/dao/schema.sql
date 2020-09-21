@@ -18,5 +18,16 @@ email_address varchar(100) not null,
 shipping_adddress varchar(500) not null,
 constraint Customer_PK primary key (customer_id)
 );
+create table Sale(
+sale_id int(10) auto_increment(1000),
+date date not null,
+status varchar(500) not null,
+constraint Sale_PK primary key (sale_id)
 
+);
+create table SaleItem(
+quantityPurchased decimal(6,2) not null,
+salePrice decimal(6,2) not null,
+constraint SaleItem_PK primary key (sale_id)
 
+);
