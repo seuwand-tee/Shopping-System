@@ -16,6 +16,7 @@ import org.jooby.json.Gzon;
 public class Server extends Jooby{
     final dao.ProductDAO productDao = new dao.ProductJdbcDAO(); 
     final dao.CustomerDAO customerDao = new dao.CustomerCollectionsDAO();
+    final dao.SaleDAO salesDao = new dao.SaleJdbcDAO(); 
     public static void main(String[] args) throws Exception {
    System.out.println("\nStarting Server.");
 
@@ -39,5 +40,6 @@ public class Server extends Jooby{
     use(new Gzon());
     use(new web.CustomerModel(customerDao));
     use(new AssetModule());
+     use(new web.SalesModule(salesDao));
     }
 }
