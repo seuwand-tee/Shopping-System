@@ -6,6 +6,7 @@ and open the template in the editor.
 -->
 <html ng-app="ShoppingApp">
     <head>
+		 <link rel ="stylesheet" href="css/style.css" >
         <title>Create An Account</title>
         <meta charset="windows-1252">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,12 +21,13 @@ and open the template in the editor.
         <form ng-controller="CustomerController as custCtrl", ng-submit="custCtrl.registerCustomer(customer)">
             <fieldset>
                 <legend>Account Details</legend>
-                <input type="text" ng-model="customer.username" required>
-                <input type="text" ng-model="customer.firstName" required>
+                <label>Username:</label><input type="text" ng-model="customer.username" required>
+					 <br>
+                <input type="text" ng-model="customer.firstname" required>
                 <input type="text" ng-model="customer.surname" required>
                 <input type="email" ng-model="customer.email_address" required>
                 <input type="text" ng-model="customer.shipping_address" required>
-                <input type="password" ng-model="customer.shipping_address" required>
+                <input type="password" ng-model="customer.password" required>
                 <button type="submit">Create Account</button>
             </fieldset>
         </form>

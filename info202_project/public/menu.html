@@ -1,16 +1,4 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="windows-1252">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
+
         <div id="menu" ng-controller="CustomerController as custCtrl" ng-init="custCtrl.checkSignIn()">
             <div id="welcome">{{custCtrl.welcome}}</div>
             <a href=".">Home</a>
@@ -19,5 +7,3 @@ and open the template in the editor.
             <a href="#" ng-if="custCtrl.signedIn" ng-click="custCtrl.signOut()">Sign Out</a>
             <a href="signin.html" ng-if="!custCtrl.signedIn">Sign In</a>
         </div>
-    </body>
-</html>
