@@ -33,7 +33,7 @@ and open the template in the editor.
             <tr data-ng-repeat="product in prodCtrl.products", ng-controller="ShoppingCartController as shopCtrl">
                 <td>{{product.name}}</td>
                 <td>{{product.description}}</td>
-                <td>{{product.list_price}}</td>
+                <td>{{product.list_price | currency}}</td>
                 <td>{{product.quantity_in_stock}}</td>
                 <td><button ng-controller="ShoppingCartController as cartCtrl" ng-click="cartCtrl.buy(product)">Buy</button></td>
             </tr>

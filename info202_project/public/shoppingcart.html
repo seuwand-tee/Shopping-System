@@ -30,7 +30,7 @@ and open the template in the editor.
             <tbody ng-controller="ShoppingCartController as cartCtrl">
             <tr data-ng-repeat="item in cartCtrl.items">
                 <td>{{item.product.name}}</td>
-                <td>{{item.sale_price}}</td>
+                <td>{{item.sale_price | currency}}</td>
                 <td>{{item.quantity_purchased}}</td>
                 <td>{{item.getItemTotal() | currency}}</td>
             </tr>
