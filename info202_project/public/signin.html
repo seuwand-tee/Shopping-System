@@ -22,11 +22,11 @@ and open the template in the editor.
         <form ng-submit="custCtrl.signIn(username, password)">
             <fieldset>
                 <legend>Account Details</legend>
-                <input type="username" ng-model="username" required>
-                <input type="password" ng-model="password" required>
+                <label>Username:</label><input type="username" ng-model="username" required>
+                <label>Password:</label><input type="password" ng-model="password" required>
                 <button type="submit">Sign In</button>
             </fieldset>
-            <p>If you don't have an account, please </p>
-            <a href="http://localhost:8080/account.html">create one</a>
+            <p>If you don't have an account, please <a href="http://localhost:8080/account.html">create one</a> </p>
+		  </form>>
     </body>
 </html>

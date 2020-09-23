@@ -4,13 +4,18 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html>
+<html ng-app="ShoppingApp">
     <head>
         <title>TODO supply a title</title>
         <meta charset="windows-1252">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		  <script src="js/angular.js"></script>
+        <script src="js/angular-resource.js"></script>
+        <script src="js/ngStorage.js"></script>
+        <script src="js/shopping.js"></script>
     </head>
     <body>
+		 <div ng-include="'menu.html'" ></div>
         <h1>Shopping Cart</h1>
         <table border="1">
             <thead>
@@ -22,7 +27,7 @@ and open the template in the editor.
                     <th></th>
                 </tr>
             </thead>
-            <body ng-controller="ShoppingCartController as shopcaCtrl">
+            <body ng-controller="ShoppingCartController as shopcartCtrl">
             <tr data-ng-repeat="product in prodCtrl.products">
                 <td>{{product.name}}</td>
                 <td>{{product.description}}</td>

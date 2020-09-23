@@ -59,7 +59,7 @@ module.factory('productAPI', function ($resource) {
 });
 
 module.factory('categoryAPI', function ($resource) {
-    return $resource('/api/categories/:cat');
+    return $resource('/api/categories/:category');
 });
 
 module.factory('signInAPI', function ($resource) {
@@ -68,6 +68,9 @@ module.factory('signInAPI', function ($resource) {
 
 module.factory('registerAPI', function ($resource) {
    return $resource('/api/register');
+});
+module.factory('salesAPI', function ($resource){
+	return $resource ('/api/sales');
 });
 
 module.factory('cart', function ($sessionStorage) {
@@ -151,5 +154,18 @@ module.controller('ShoppingCartController', function (cart, $sessionStorage, $wi
 	this.buy = function(product){
 		 $sessionStorage.selectedProduct = product;
 		 $window.location = "quantity.html";
+	};
+	
+	this.addToCart = function(quantity){
+		let item = new SaleItem(selectedProduct, quantity);
+		cart.addItem(item);
+		$sessionStorage.cart = cart;
+		$window.location = "shoppingcart.html";
+	};
+	
+	this.checkoutCart = function (){
+		salesAPI.save();
+		delete $sessionStorage.cart;
+		$window.location = "thankyou.html";
 	};
 });

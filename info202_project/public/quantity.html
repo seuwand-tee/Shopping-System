@@ -4,11 +4,15 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html>
+<html ng-app="ShoppingApp">
     <head>
         <title>Buying Product</title>
         <meta charset="windows-1252">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		  <script src="js/angular.js"></script>
+        <script src="js/angular-resource.js"></script>
+        <script src="js/ngStorage.js"></script>
+        <script src="js/shopping.js"></script>
     </head>
     <body>
             <div ng-include="'menu.html'" ></div>
@@ -19,7 +23,7 @@ and open the template in the editor.
             <tbody>
                 <tr>
                     <td>ID:</td>
-                    <td>{{cartCtrl.selectedProduct.productId}}</td>
+                    <td>{{cartCtrl.selectedProduct.productID}}</td>
                 </tr>
                 <tr>
                     <td>Name:</td>
@@ -27,15 +31,15 @@ and open the template in the editor.
                 </tr>
                 <tr>
                     <td>Description:</td>
-                    <td>item</td>
+                    <td>{{cartCtrl.selectedProduct.description}}</td>
                 </tr>
                 <tr>
                     <td>Price:</td>
-                    <td>123</td>
+                    <td>{{cartCtrl.selectedProduct.list_price}}</td>
                 </tr>
                 <tr>
                     <td>Quantity Available</td>
-                    <td>234</td>
+                    <td>{{cartCtrl.selectedProduct.quantity_in_stock}}</td>
                 </tr>
             </tbody>
         </table>
@@ -44,7 +48,7 @@ and open the template in the editor.
                 <legend>Quantity to Buy</legend>
                 <label for="quantityInStock">How many?</label>
                 <input id="quantityInStock" name="quantityInStock" type="text">
-                <button type="submit">Add to Cart</button>
+                <button ng-controller="ShoppingCartController as cartCtrl" ng-click="cartCtrl.addToCart(quantity)">Add to Cart</button>
 
     </body>
 </html>
