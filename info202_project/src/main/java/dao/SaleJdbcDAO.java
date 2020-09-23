@@ -31,14 +31,14 @@ public class SaleJdbcDAO implements SaleDAO {
 		try {
 			try (
 					PreparedStatement insertSaleStmt = con.prepareStatement(
-							"**** SQL for saving Sale goes here ****",
+							"insert into Sale (sale_id, date, status, customer_id) values (?,?,?,?)",
 							Statement.RETURN_GENERATED_KEYS);
  
 					PreparedStatement insertSaleItemStmt = con.prepareStatement(
-							"**** SQL for saving SaleItem goes here ****");
+							"insert into SaleItem (quantityPurchased, salePrice, sale_id, productID) values (?,?,?,?)");
  
 					PreparedStatement updateProductStmt = con.prepareStatement(
-							"**** SQL for updating product quantity goes here ****");
+							"update Product set (quantityInStock = ?) where (productID = ?)");
  
 					) {
  
@@ -66,7 +66,11 @@ public class SaleJdbcDAO implements SaleDAO {
 				// write code here that saves the timestamp and username in the
 				// sale table using the insertSaleStmt statement.
 				// ****
- 
+				insertSaleStmt.setInt(1, sale.getSale_id());
+				insertSaleStmt.setTimestamp(2, timestamp);
+				insertSaleStmt.setString(3, sale.getStatus());
+				insertSaleStmt.setObject(4, customer);
+
  
 				// get the auto-generated sale ID from the database
 				ResultSet rs = insertSaleStmt.getGeneratedKeys();
@@ -88,6 +92,12 @@ public class SaleJdbcDAO implements SaleDAO {
 				// write code here that iterates through the sale items and
 				// saves them using the insertSaleItemStmt statement.
 				// ****
+				for (SaleItem item: items){
+				insertSaleItemStmt.setBigDecimal(1, item.getQuantity_purchased());
+				insertSaleItemStmt.setBigDecimal(2, item.getSale_price());
+				insertSaleItemStmt.setInt(3, saleId);
+				insertSaleItemStmt.setObject(4, customer);
+				}
  
  
 				// ## update the product quantities ## //
@@ -100,6 +110,8 @@ public class SaleJdbcDAO implements SaleDAO {
 					// write code here that updates the product quantity using
 					// the updateProductStmt statement.
 					// ****
+				updateProductStmt.setBigDecimal(1, product.getQuantityInStock());
+				updateProductStmt.setString(2, product.getProductID());
  
  
 				}

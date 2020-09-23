@@ -1,0 +1,17 @@
+@startuml
+skinparam {
+  Style StrictUML
+  SequenceStereotype {
+    Font {
+      Size 10
+      Style plain
+    }
+  }
+}
+actor "User" as user
+participant "Product Webpage" as product <<html>>
+participant "Product Controller" as prodCrtl <<AngularJS>> 
+participant "ProductModule" as productModule <<Jooby>>
+participant "productsList: ProductCollectionsDAO" as ProductCollectionsDAO <<dao>>
+
+@enduml
