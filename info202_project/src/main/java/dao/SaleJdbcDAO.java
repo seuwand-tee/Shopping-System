@@ -26,19 +26,20 @@ public class SaleJdbcDAO implements SaleDAO {
  
 	@Override
 	public void save(Sale sale) {
- 
+		sale.setStatus("Processing");
+		
 		Connection con = DbConnection.getConnection(url);
 		try {
 			try (
 					PreparedStatement insertSaleStmt = con.prepareStatement(
-							"insert into Sale (sale_id, date, status, customer_id) values (?,?,?,?)",
+							"insert into Sale (date, status, customer_id) values (?,?,?)",
 							Statement.RETURN_GENERATED_KEYS);
  
 					PreparedStatement insertSaleItemStmt = con.prepareStatement(
 							"insert into SaleItem (quantityPurchased, salePrice, sale_id, productID) values (?,?,?,?)");
  
 					PreparedStatement updateProductStmt = con.prepareStatement(
-							"update Product set (quantityInStock = ?) where (productID = ?)");
+							"update Product set quantityInStock = ? where productID = ?");
  
 					) {
  
@@ -66,10 +67,10 @@ public class SaleJdbcDAO implements SaleDAO {
 				// write code here that saves the timestamp and username in the
 				// sale table using the insertSaleStmt statement.
 				// ****
-				insertSaleStmt.setInt(1, sale.getSale_id());
-				insertSaleStmt.setTimestamp(2, timestamp);
-				insertSaleStmt.setString(3, sale.getStatus());
-				insertSaleStmt.setObject(4, customer);
+				insertSaleStmt.setTimestamp(1, timestamp);
+				insertSaleStmt.setString(2, sale.getStatus());
+				insertSaleStmt.setInt(3, customer.getCustomer_id());
+				insertSaleStmt.executeUpdate();
 
  
 				// get the auto-generated sale ID from the database
@@ -96,7 +97,8 @@ public class SaleJdbcDAO implements SaleDAO {
 				insertSaleItemStmt.setBigDecimal(1, item.getQuantity_purchased());
 				insertSaleItemStmt.setBigDecimal(2, item.getSale_price());
 				insertSaleItemStmt.setInt(3, saleId);
-				insertSaleItemStmt.setObject(4, customer);
+				insertSaleItemStmt.setString(4, item.getProduct().getProductID());
+				insertSaleItemStmt.executeUpdate();
 				}
  
  
@@ -110,8 +112,9 @@ public class SaleJdbcDAO implements SaleDAO {
 					// write code here that updates the product quantity using
 					// the updateProductStmt statement.
 					// ****
-				updateProductStmt.setBigDecimal(1, product.getQuantityInStock());
+				updateProductStmt.setBigDecimal(1, product.getQuantityInStock().subtract(item.getQuantity_purchased()));
 				updateProductStmt.setString(2, product.getProductID());
+				updateProductStmt.executeUpdate();
  
  
 				}

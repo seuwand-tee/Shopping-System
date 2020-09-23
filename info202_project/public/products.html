@@ -6,6 +6,7 @@ and open the template in the editor.
 -->
 <html ng-app="ShoppingApp">
     <head>
+		 <link rel ="stylesheet" href="css/style.css" >
         <title>View Products</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,8 +33,8 @@ and open the template in the editor.
             <tr data-ng-repeat="product in prodCtrl.products", ng-controller="ShoppingCartController as shopCtrl">
                 <td>{{product.name}}</td>
                 <td>{{product.description}}</td>
-                <td>{{product.price}}</td>
-                <td>{{product.quantityInStock}}</td>
+                <td>{{product.list_price}}</td>
+                <td>{{product.quantity_in_stock}}</td>
                 <td><button ng-controller="ShoppingCartController as cartCtrl" ng-click="cartCtrl.buy(product)">Buy</button></td>
             </tr>
         </tbody>

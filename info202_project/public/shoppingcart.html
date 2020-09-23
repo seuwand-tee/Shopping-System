@@ -6,7 +6,8 @@ and open the template in the editor.
 -->
 <html ng-app="ShoppingApp">
     <head>
-        <title>TODO supply a title</title>
+		 <link rel ="stylesheet" href="css/style.css" >
+        <title>Check Out</title>
         <meta charset="windows-1252">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 		  <script src="js/angular.js"></script>
@@ -24,18 +25,17 @@ and open the template in the editor.
                     <th>Price</th>
                     <th>Quantity</th>
                     <th>Total</th>
-                    <th></th>
                 </tr>
             </thead>
-            <body ng-controller="ShoppingCartController as shopcartCtrl">
-            <tr data-ng-repeat="product in prodCtrl.products">
-                <td>{{product.name}}</td>
-                <td>{{product.description}}</td>
-                <td>{{product.price}}</td>
-                <td>{{product.quantityInStock}}</td>
-                <td><button>All</button></td>
+            <tbody ng-controller="ShoppingCartController as cartCtrl">
+            <tr data-ng-repeat="item in cartCtrl.items">
+                <td>{{item.product.name}}</td>
+                <td>{{item.sale_price}}</td>
+                <td>{{item.quantity_purchased}}</td>
+                <td>{{item.getItemTotal() | currency}}</td>
             </tr>
         </tbody>
     </table>
+		  <button ng-controller="ShoppingCartController as cartCtrl" ng-click="cartCtrl.checkoutCart()">Check Out Cart</button>
     </body>
 </html>

@@ -68,16 +68,15 @@ public class CustomerJdbcDAO implements CustomerDAO {
 
     @Override
     public void saveCustomer(Customer customer) {
-        String sql = "insert into Customer (customer_id, username, firstname, surname, password, email_address, shipping_address) values (?,?,?,?,?,?,?)";
+        String sql = "insert into Customer (username, firstname, surname, password, email_address, shipping_address) values (?,?,?,?,?,?)";
         try (
                  Connection dbCon = DbConnection.getConnection(uri);  PreparedStatement stmt = dbCon.prepareStatement(sql);) {
-            stmt.setInt(1, customer.getCustomer_id());
-            stmt.setString(2, customer.getUsername());
-            stmt.setString(3, customer.getFirstname());
-            stmt.setString(4, customer.getSurname());
-            stmt.setString(5, customer.getPassword());
-            stmt.setString(6, customer.getEmail_address());
-            stmt.setString(7, customer.getShipping_address());
+            stmt.setString(1, customer.getUsername());
+            stmt.setString(2, customer.getFirstname());
+            stmt.setString(3, customer.getSurname());
+            stmt.setString(4, customer.getPassword());
+            stmt.setString(5, customer.getEmail_address());
+            stmt.setString(6, customer.getShipping_address());
 
             stmt.executeUpdate();  // execute the statement
 

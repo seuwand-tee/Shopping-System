@@ -63,7 +63,7 @@ module.factory('categoryAPI', function ($resource) {
 });
 
 module.factory('signInAPI', function ($resource) {
-   return $resource('/api/customers/:username');
+   return $resource('/api/customer/:username');
 });
 
 module.factory('registerAPI', function ($resource) {
@@ -94,7 +94,7 @@ module.controller('ProductController', function (productAPI, categoryAPI) {
 	
 	// click handler for the category filter buttons
 	this.selectCategory = function (selectedCat) {
-		this.products = categoryAPI.query({"cat": selectedCat});
+		this.products = categoryAPI.query({"category": selectedCat});
 	};
 	this.showAll = function () {
 		this.products = productAPI.query();
@@ -143,10 +143,24 @@ module.controller('CustomerController', function (registerAPI, signInAPI, $windo
 			}
 		);
 	};
+	this.checkSignIn = function () {
+   // has the customer been added to the session?
+   if ($sessionStorage.customer) {
+      this.signedIn = true;
+      this.welcome = "Welcome " + $sessionStorage.customer.firstname;
+    } else {
+      this.signedIn = false;
+    }
+};
+
+this.signOut = function (){
+	$sessionStorage.$reset();
+};
+
 });
 
 
-module.controller('ShoppingCartController', function (cart, $sessionStorage, $window) {
+module.controller('ShoppingCartController', function (cart, $sessionStorage, $window, salesAPI) {
 	this.items = cart.getItems();
 	this.total = cart.getTotal();
 	this.selectedProduct = $sessionStorage.selectedProduct;
@@ -157,14 +171,15 @@ module.controller('ShoppingCartController', function (cart, $sessionStorage, $wi
 	};
 	
 	this.addToCart = function(quantity){
-		let item = new SaleItem(selectedProduct, quantity);
+		let item = new SaleItem(this.selectedProduct, quantity);
 		cart.addItem(item);
 		$sessionStorage.cart = cart;
 		$window.location = "shoppingcart.html";
 	};
 	
 	this.checkoutCart = function (){
-		salesAPI.save();
+		cart.setCustomer($sessionStorage.customer);
+		salesAPI.save(cart);
 		delete $sessionStorage.cart;
 		$window.location = "thankyou.html";
 	};

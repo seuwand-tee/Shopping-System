@@ -15,7 +15,7 @@ firstname varchar(50) not null,
 surname varchar(50) not null,
 password varchar(100) not null,
 email_address varchar(100) not null,
-shipping_adddress varchar(500) not null,
+shipping_address varchar(500) not null,
 constraint Customer_PK primary key (customer_id)
 );
 create table Sale(
