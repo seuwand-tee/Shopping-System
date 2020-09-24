@@ -49,7 +49,9 @@ and open the template in the editor.
                 <legend>Quantity to Buy</legend>
                 <label for="quantityInStock">How many?</label>
                 <input required id ="quantityInStock" name="quantityInStock" type="number" onkeypress="return event.charCode >= 48" min = "1" ng-model="quantity">
-                <button id="checkout" ng-controller="ShoppingCartController as cartCtrl" ng-click="cartCtrl.addToCart(quantity)">Add to Cart</button>
+                <div id="box">
+					 <button id="checkout" ng-controller="ShoppingCartController as cartCtrl" ng-click="cartCtrl.addToCart(quantity)">Add to Cart</button>
+					 </div>
 				</fieldset>
 		  </form>
 

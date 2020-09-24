@@ -48,7 +48,6 @@ table{
 	  padding: 14px 20px;
 	  border: none;
 	  cursor: pointer;
-	  width: 100%;
 	  font-size: 25px;
   }
 
@@ -81,7 +80,7 @@ table{
 	  padding: 15px;
   }
   
-  #menu{
+  #menu a{
 	  text-align: center;
 	  border: none;
 	  padding: 10px 10px;
@@ -91,9 +90,17 @@ table{
   }
   
   #checkout{
-	  width: auto;
+	  margin: auto;
   }
   
   #welcome{
 	  padding: 10px;
+  }
+  
+  #checkout{
+	  width: auto;
+  }
+  
+  #box{
+	  text-align: center;
   }
