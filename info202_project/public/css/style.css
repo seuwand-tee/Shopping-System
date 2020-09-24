@@ -21,7 +21,6 @@ img {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 50%;
 }
 
 table, th, td {
@@ -29,12 +28,13 @@ table, th, td {
   text-align: left;
   border-bottom: 1px solid black;
   margin: 0 auto;
+  font-size: 25px;
 }
 
 table{
 	border-collapse: collapse;
     margin:auto; 
-	 width: 100%;
+	 width: 100px;
   }
 
   fieldset{
@@ -42,7 +42,58 @@ table{
 	  width: 50%;
   }
   
-  input{
+  
+  button{
+	  margin: 8px 0;
+	  padding: 14px 20px;
+	  border: none;
+	  cursor: pointer;
 	  width: 100%;
+	  font-size: 25px;
+  }
+
+  legend{
+	  font-size: 25px;
   }
   
+  input{
+	  width: 100%;
+	  padding: 12px 20px;
+	  margin: 8px 0;
+	  display: inline-block;
+	  border: 1px solid;
+	  box-sizing: border-box;
+	  font-family: Georgia, cursive;
+	  font-size: 15px;
+  }
+  
+  #container{
+	  margin: auto;
+	  width: 50%;
+	  text-align: center;
+  }
+  
+  #cat, #all{
+	  display: inline-block;
+	  margin-right: 10px;
+	  width: auto;
+	  font-size: 20px;
+	  padding: 15px;
+  }
+  
+  #menu{
+	  text-align: center;
+	  border: none;
+	  padding: 10px 10px;
+	  margin: 8px 0;
+	  text-decoration: none;
+	  font-size: 30px;
+  }
+  
+  #checkout{
+	  width: auto;
+  }
+  
+  #welcome{
+	  padding: 10px;
+  }

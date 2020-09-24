@@ -35,7 +35,16 @@ and open the template in the editor.
                 <td>{{item.getItemTotal() | currency}}</td>
             </tr>
         </tbody>
+		  <tfoot ng-controller="ShoppingCartController as cartCtrl">
+			  <tr>
+				  <td>Total Price</td>
+				  <td></td>
+				  <td></td>
+				  <td>{{cartCtrl.total | currency}}</td>
+			</tfoot>
+			  
     </table>
-		  <button ng-controller="ShoppingCartController as cartCtrl" ng-click="cartCtrl.checkoutCart()">Check Out Cart</button>
+		  <br>
+		  <button id = "checkout "ng-controller="ShoppingCartController as cartCtrl" ng-click="cartCtrl.checkoutCart()">Check Out Cart</button>
     </body>
 </html>

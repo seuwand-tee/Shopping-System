@@ -9,9 +9,25 @@ skinparam {
   }
 }
 actor "User" as user
-participant "Product Webpage" as product <<html>>
-participant "Product Controller" as prodCrtl <<AngularJS>> 
+participant "Products" as product <<html>>
+participant "ProductController: Shopping" as prodCtrl <<AngularJS>> 
+participant ":productAPI" as productAPI <<$resource>>
+participant "Server" as server <<Jooby>>
 participant "ProductModule" as productModule <<Jooby>>
-participant "productsList: ProductCollectionsDAO" as ProductCollectionsDAO <<dao>>
+participant "ProductJdbcDAO" as ProductJdbcDAO <<dao>>
 
+
+user -> product++ : clicks the "View Product" button
+product -> prodCtrl++ : <<construct>>
+prodCtrl -> productAPI++ : query()
+productAPI -> server++ : http get /API/Products
+server -> productModule++ : get("/api/products")
+productModule -> ProductJdbcDAO++ : getProduct()
+
+return products (java) 
+return products (java) 
+return products (Json) 
+return products (Javascript) 
+return update Page
+return Products Displayed
 @enduml

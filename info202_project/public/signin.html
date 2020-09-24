@@ -18,13 +18,15 @@ and open the template in the editor.
     <body ng-controller="CustomerController as custCtrl">
         <div ng-include="'menu.html'" ></div>
         <h1>Sign In</h1>
-        <h2>Please sign-in to continue</h2>
         <p>{{custCtrl.signInMessage}}</p>
         <form ng-submit="custCtrl.signIn(username, password)">
             <fieldset>
                 <legend>Account Details</legend>
                 <label>Username:</label><input type="username" ng-model="username" required>
+					 <br>
                 <label>Password:</label><input type="password" ng-model="password" required>
+					 <br>
+					 <br>
                 <button type="submit">Sign In</button>
             </fieldset>
             <p>If you don't have an account, please <a href="http://localhost:8080/account.html">create one</a> </p>
