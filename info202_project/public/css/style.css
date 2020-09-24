@@ -89,6 +89,10 @@ table{
 	  font-size: 30px;
   }
   
+  #menu {
+	  text-align: center;
+  }
+  
   #checkout{
 	  margin: auto;
   }
