@@ -52,6 +52,7 @@ public class Main {
 		gui.MainMenu main = new gui.MainMenu(productsList);
 		main.setLocationRelativeTo(null);
 		main.setVisible(true);
+
 	}
 	
 }
