@@ -1,4 +1,4 @@
-
+SET ALLOW_LITERALS ALL;
 create table Product(
 productID varchar(50) not null,
 name varchar(50) not null,
@@ -35,3 +35,15 @@ constraint SaleItem_PK primary key (sale_id, productID),
 constraint SaleItem_Sale_FK foreign key (sale_id) references Sale(sale_id),
 constraint SaleItem_Product_FK foreign key (ProductID) references Product(ProductID)
 );
+SET ALLOW_LITERALS NONE;
+-- create the role
+create role if not exists account_role;
+
+-- grant table rights to to the role
+grant select, insert on customer to account_role;
+
+-- create the user
+create user if not exists account_user password 'somepassword';
+
+-- add the user to the role
+grant account_role to account_user;

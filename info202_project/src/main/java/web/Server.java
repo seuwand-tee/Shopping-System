@@ -40,6 +40,6 @@ public class Server extends Jooby{
     use(new Gzon());
     use(new web.CustomerModel(customerDao));
     use(new AssetModule());
-    use(new web.SalesModule(salesDao));
+    use(new web.SalesModule(salesDao, productDao));
     }
 }

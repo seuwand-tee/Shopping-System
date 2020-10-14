@@ -23,8 +23,8 @@ public class ProductCollectionsDAOTest {
 	private domain.Product product1;
 	private domain.Product product2;
 	private domain.Product product3;
-	//private static dao.ProductCollectionsDAO products;
-        dao.ProductDAO products = new dao.ProductJdbcDAO("jdbc:h2:mem:tests;INIT=runscript from 'src/main/java/dao/schema.sql'");
+	//private  dao.ProductCollectionsDAO products = new ProductCollectionsDAO();
+dao.ProductDAO products = new dao.ProductJdbcDAO("jdbc:h2:mem:tests;INIT=runscript from 'src/main/java/dao/schema.sql'");
 
 	@BeforeEach
 	public void setUp() {

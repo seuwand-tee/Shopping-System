@@ -6,6 +6,7 @@
 package dao;
 
 import domain.Customer;
+import helpers.ScryptHelper;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,6 +19,7 @@ import java.sql.SQLException;
 public class CustomerJdbcDAO implements CustomerDAO {
 
     private String uri;
+	
 
     public CustomerJdbcDAO() {
         uri = dao.DbConnection.getDefaultConnectionUri();
@@ -68,13 +70,14 @@ public class CustomerJdbcDAO implements CustomerDAO {
 
     @Override
     public void saveCustomer(Customer customer) {
+		  String hash = ScryptHelper.hash(customer.getPassword()).toString();
         String sql = "insert into Customer (username, firstname, surname, password, email_address, shipping_address) values (?,?,?,?,?,?)";
         try (
                  Connection dbCon = DbConnection.getConnection(uri);  PreparedStatement stmt = dbCon.prepareStatement(sql);) {
             stmt.setString(1, customer.getUsername());
             stmt.setString(2, customer.getFirstname());
             stmt.setString(3, customer.getSurname());
-            stmt.setString(4, customer.getPassword());
+            stmt.setString(4, hash);
             stmt.setString(5, customer.getEmail_address());
             stmt.setString(6, customer.getShipping_address());
 
@@ -95,11 +98,17 @@ public class CustomerJdbcDAO implements CustomerDAO {
                  Connection dbCon = DbConnection.getConnection(uri); // create the statement
                   PreparedStatement stmt = dbCon.prepareStatement(sql);) {
             stmt.setString(1, username);
-            stmt.setString(2, password);
-// execute the query
+           
             ResultSet rs = stmt.executeQuery();
+				if (rs.next()) {
+         String hash = rs.getString("password");
 
-            return (rs.next());
+         // check that the password matches the hash
+         return ScryptHelper.check(hash, password);
+      } else {
+         // no matching username
+         return false;
+      }
 
         } catch (SQLException ex) {  // we are forced to catch SQLException
             // don't let the SQLException leak from our DAO encapsulation

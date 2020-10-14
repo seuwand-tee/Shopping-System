@@ -40,6 +40,7 @@ public class SaleJdbcDAO implements SaleDAO {
  
 					PreparedStatement updateProductStmt = con.prepareStatement(
 							"update Product set quantityInStock = ? where productID = ?");
+					  
  
 					) {
  
